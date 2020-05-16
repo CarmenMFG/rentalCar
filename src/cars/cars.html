@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Wine Cellar</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/cars.style.css" />
+</head>
+<body>
+  <div class="container-fluid d-flex justify-content-center mt-2"></div> 
+    <form>
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Name" id="txtName">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Is sale on" id="txtIsSaleOn">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Price" id="txtPrice">
+        </div>
+       
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Food Pairing" id="txtFoodPairing">
+        </div>
+        <div class="col">
+          <input type='file'  class="form-control-file" id="txtImage">
+        </div>
+        <div class="col-3 pt-1">
+          <button type="button" class="btn btn-secondary btn-sm" id="reset">Reset</button>
+
+          <button type="button" class="btn btn-secondary btn-sm" id="add">Add</button>
+       
+          <button type="button" class="btn btn-secondary btn-sm" id="update">Update</button>
+       
+          <button type="button" class="btn btn-secondary btn-sm" id="delete">Delete</button>
+      
+          <button type="button" class="btn btn-secondary btn-sm" id="buy">Buy</button>
+        
+        </div>
+      </div>
+    </form>
+</div>
+  <div class="container-fluid d-flex justify-content-center">
+   
+    <div class="row col-lg-9 d-flex justify-content-center m-5 " id="winesCards"></div>
+    <div class="row col-lg-3 d-flex justify-content-center"></div>
+  </div>
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script src="../../shared/models/cars.model.js"></script>
+  <script src="../../shared/models/bookins.model.js"></script>  
+  <script src="../../shared/services/storage.service.js"></script>
+  <script src="cars.service.js"></script>
+  <script src="cars.view.js"></script>
+  <script src="cars.controller.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
