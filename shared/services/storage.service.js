@@ -14,14 +14,13 @@ class StorageService {
      */
 
 
-    constructor({ type, configuration ,key }) {
+    constructor({ type, configuration}) {
         if (type === 'indexedDB' || type=='Dixie') {
             this.db;
         }
-        this.KEY=key;
         this.type = type;
         this.configuration = configuration;
-        
+       
     }
 
 
@@ -42,30 +41,28 @@ class StorageService {
         } 
     }
     
-    /// Cuidado hay q quitar los wines //////
     _addDixie=(item)=>{
-      this.db.wines.add(item);  
+      this.db.element.add(item);  
      }
         
 
     _addLocal = (item) => {
             let items=this._loadStore();
             items = [...items, item];
-            localStorage.setItem(this.KEY, JSON.stringify(items));
+            localStorage.setItem(this.configuration.db, JSON.stringify(items));
         
     };
 
-    _addIndexed = (wine) => {
-        this._findOneIndexed(wine)
-            .then((ejemplo) => {
-                console.log(ejemplo);
-                console.log('Vino ya existente');
+    _addIndexed = (item) => {
+        this._findOneIndexed(item)
+            .then((element) => {
+               console.log('El elemento ya existe');
             })
             .catch(() => {
-               let transaction = this.db.transaction(['wines'], 'readwrite');
-               let objectStore = transaction.objectStore('wines');
-               let request = objectStore.add(wine);
-               request.onsuccess = () => console.log('Vino añadido');
+               let transaction = this.db.transaction([this.configuration.db], 'readwrite');
+               let objectStore = transaction.objectStore(this.configuration.db);
+               let request = objectStore.add(item);
+               request.onsuccess = () => console.log('Elemento añadido');
            
 
             });
@@ -87,19 +84,19 @@ class StorageService {
         } 
      }  
      _removeDixie=(item)=>{
-        this.db.wines.where("id").anyOf(item.id).delete();
+        this.db.element.where("id").anyOf(item.id).delete();
      }  
       
     
     _removeLocal = (item) => {
         const id = this.configuration.key;
         const items = this._loadStore().filter((_item) => _item[id] !== item[id]);
-        localStorage.setItem(this.KEY, JSON.stringify(items));
+        localStorage.setItem(this.configuration.db, JSON.stringify(items));
     };
-    _removeIndexed = (wine) => {
-        const transaction = this.db.transaction(['wines'], 'readwrite');
-        const objectStore = transaction.objectStore('wines');
-        const request = objectStore.delete(wine.id);
+    _removeIndexed = (item) => {
+        const transaction = this.db.transaction([this.configuration.db], 'readwrite');
+        const objectStore = transaction.objectStore(this.configuration.db);
+        const request = objectStore.delete(item[this.configuration.key]);
         request.onsuccess = () => console.log('Vino borrado');
     };
 
@@ -120,7 +117,7 @@ class StorageService {
                 
     };
     _updateDixie=(item)=>{
-      this.db.wines.update(item.id,item); 
+      this.db.element.update(item.id,item); 
     }
 
     _updateLocal = (item) => {
@@ -128,12 +125,12 @@ class StorageService {
         const items = this._loadStore().map((_item) =>
             item[id] === _item[id] ? item : _item,
         );
-        localStorage.setItem(this.KEY, JSON.stringify(items));
+        localStorage.setItem(this.configuration.db, JSON.stringify(items));
     };
-    _updateIndexed = (wine) => {
-        const transaction = this.db.transaction(['wines'], 'readwrite');
-        const objectStore = transaction.objectStore('wines');
-        const request = objectStore.put(wine);
+   _updateIndexed = (item) => {
+        const transaction = this.db.transaction([this.configuration.db], 'readwrite');
+        const objectStore = transaction.objectStore(this.configuration.db);
+        const request = objectStore.put(item);
     };
 
     /*---------------------------FINDONE------------------------------------------------------------------ */
@@ -156,18 +153,18 @@ class StorageService {
       return content;
     }
     _findOneDixie(item) {  
-      this.db.wines.filter((wine)=>wine.id==item.id);
+      this.db.element.filter((_item)=>_item[this.configuration.key]==item[this.configuration.key]);
     };
    _findOneLocal(item) {
         const idToFind = item[this.configuration.key];
         const items = this._loadStore();
         return items.find((item) => item[this.configuration.key] === idToFind);
     }
-    _findOneIndexed = (wine) => {
-        const transaction = this.db.transaction(['wines'], 'readwrite');
-        const objectStore = transaction.objectStore('wines');
+    _findOneIndexed = (item) => {
+        const transaction = this.db.transaction([this.configuration.db], 'readwrite');
+        const objectStore = transaction.objectStore(this.configuration.db);
         return new Promise((resolve, reject) => {
-            const request = objectStore.get(wine.id);
+            const request = objectStore.get(item[this.configuration.key]);
             request.onsuccess = (event) => {
                 const result = event.target.result;
                 result ? resolve(result) : reject();
@@ -193,8 +190,8 @@ class StorageService {
          
      }
      _findDixie() {
-              
-      return  this.db.wines.toArray();
+      console.log( this.db.container1);
+      return  this.db.element.toArray();
       }
 
     _findLocal() {
@@ -202,24 +199,24 @@ class StorageService {
         return Promise.resolve(this._loadStore());
     }
     _loadStore() {
-        return (JSON.parse(localStorage.getItem(this.KEY)) || []);
+      console.log("dentro del storage",this.configuration.db);
+        return (JSON.parse(localStorage.getItem(this.configuration.db)) || []);
 
     }
 
     _findIndexed = () => {
-        const transaction = this.db.transaction(['wines'], 'readwrite');
-        const objectStore = transaction.objectStore('wines');
+        const transaction = this.db.transaction([this.configuration.db], 'readwrite');
+        const objectStore = transaction.objectStore(this.configuration.db);
         const request = objectStore.openCursor();
         return new Promise((resolve, reject) => {
-          const wines = [];
-    
+          const obs = [];
           request.onsuccess = (e) => {
             const cursor = e.target.result;
             if (cursor) {
-              wines.push(cursor.value);
+              obs.push(cursor.value);
               cursor.continue();
             } else {
-              resolve(wines);
+              resolve(obs);
             }
           };
         });
@@ -243,10 +240,10 @@ class StorageService {
        
       }
     
-      _initializeIndexedDB() {
+     _initializeIndexedDB() {
         return this._openIndexedDB().then(() => {
-          let transaction = this.db.transaction('wines', 'readwrite');
-          let objectStore = transaction.objectStore('wines');
+          let transaction = this.db.transaction(this.configuration.db, 'readwrite');
+          let objectStore = transaction.objectStore(this.configuration.db);
     
           objectStore.onsuccess = function () {
             console.log('objectStore.result', objectStore.result);
@@ -259,11 +256,10 @@ class StorageService {
       }
     
       _initializeLocalStorage() {
-        localStorage.setItem(this.KEY, JSON.stringify(this.initialWines));
-        return Promise.resolve(true);
+         return Promise.resolve(true);
       }
     
-      _openIndexedDB = () => {
+       _openIndexedDB = () => {
         return new Promise((resolve, reject) => {
           const indexedDB = window.indexedDB;
           if (!indexedDB) {
@@ -274,7 +270,7 @@ class StorageService {
           }
     
           //base datos
-          const request = indexedDB.open('wineCellar', 2);
+          const request = indexedDB.open(this.configuration.db, 2);
     
           request.onsuccess = () => {
             this.db = request.result;
@@ -282,18 +278,18 @@ class StorageService {
           };
     
           request.onupgradeneeded = () =>
-            request.result.createObjectStore('wines', { keyPath: 'id' });
+            request.result.createObjectStore(this.configuration.db, { keyPath: 'id' });
            
         });
       };
 
       _initializeDixie =()=>{
         if (!this.db){
-          this.db = new Dexie('wine-database');
+          this.db = new Dexie(this.configuration.db);
           this.db.version(1).stores({
-              wines: 'id'
+            element: 'id'
          });
-           Promise.resolve(true);
+          Promise.resolve(true);
    
       }
 

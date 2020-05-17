@@ -53,14 +53,14 @@ class CarView{
         this.update.disabled=false;
         this.add.disabled=false;
         this.txtRegistration.disabled =false;
-       
+        this.update.disabled=true;
     }
     bindAddCar(handler){
    
         this.add.addEventListener("click",event=>{
            event.preventDefault();  
            const car={
-                 registration: this.txtRegistration.value,
+                 id: this.txtRegistration.value,
                  brand:this.txtBrand.value,
                  model:this.txtModel.value,
                  color:this.txtColor.value,
@@ -68,8 +68,7 @@ class CarView{
                  garaje:this.txtGaraje.value
                 }
             handler(car);
-            this._resetInputs();
-            this.manageCars.style.display = 'none';
+           
         })
     }
     bindResetForm(){
@@ -115,7 +114,7 @@ class CarView{
         })  
      }
      completeForm({id,brand,model,color,price,garaje}){
-        this.txtRegistration.value=id
+        this.txtRegistration.value=id;
         this.txtBrand.value=brand;
         this.txtModel.value=model;
         this.txtColor.value=color;
@@ -140,6 +139,6 @@ class CarView{
              
          })
     } 
-
+  
 
 }        

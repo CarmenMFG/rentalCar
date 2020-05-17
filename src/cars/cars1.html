@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rental a Car</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--  <link rel="stylesheet" href="../../css/cars.style.css" />-->
+ 
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+              <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                          <h2>Manage <b>CARS</b></h2>
+                        </div>
+                        <div id="btnShowForm" class="col-sm-6">
+                          <a href="" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Wine</span></a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Registration</th>
+                        <th>Brand</th>    
+                        <th >Model</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                        <th>Garage</th>
+                        <th></th>
+
+                      </tr>
+                    </thead>
+                    <tbody id="carsCards"></tbody>
+                </table>
+            </div>   
+              </div> 
+              <div class="col-4" id="manageCars">
+                <form>
+                  <div class="formHeader">						
+                    <h4 id="titleForm"></h4>
+                   </div>
+                  <div>					
+                    <div class="form-group">
+                      <label>Registration</label>
+                      <input id="txtRegistration" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Brand</label>
+                      <input id="txtBrand" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Model</label>
+                      <input type="textr" class="form-control" id="txtModel" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Color</label>
+                      <input type='text'  class="form-control-file" id="txtColor">
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type='text'  class="form-control-file" id="txtPrice">
+                      </div>
+                      <div class="form-group">
+                        <label>Garaje</label>
+                        <input type='text'  class="form-control-file" id="txtGaraje" value="Garaje1">
+                      </div>
+                    </div>
+                  <div class="formFooter mt-5">
+                    <input type="submit" class="btn btn-success " id="add" value="Add">
+                    <input type="submit" class="btn btn-success" id="update" value="Update">
+                    <input type="submit" class="btn btn-success" id="reset" value="Reset">
+                  </div>
+                </form>
+              </div>  
+         </div>    
+       </div>
+    
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+      <script src="../../shared/models/cars.model.js"></script>
+      <script src="../../shared/models/bookins.model.js"></script>  
+      <script src="../../shared/services/storage.service.js"></script>
+      <script src="../../shared/services/validation.service.js"></script>
+      <script src="cars.service.js"></script>
+      <script src="cars.view.js"></script>
+      <script src="cars.controller.js"></script>
+      <script src="app.js"></script>
+</body>
+</html>

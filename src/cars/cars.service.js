@@ -4,7 +4,15 @@ class CarService {
         this.dixie=dixie;
         this.cars=[];
         
-    }    
+    } 
+    async loadCarsAwait() {
+        console.log(this.dixie);
+       const cars = await this.dixie.find();
+       console.log("cars",cars);
+       this.cars=cars;
+      // this.cars = (cars || []).map(car => new Car(car));
+       return this.cars;
+    }
     bindCarListChanged(callback) {
         this.onCarListChanged = callback;
     }
@@ -14,7 +22,8 @@ class CarService {
     addCar(car) {
         let carObj = new Car(car)
         this.cars = [...this.cars, carObj];
-       // this.storageService.add(wineObj);
+        this.local.add(carObj);
+        this.dixie.add(carObj);
         this._commit(this.cars);
 
     }
@@ -23,17 +32,16 @@ class CarService {
     }
     deleteCar(car) {
         this.cars = this.cars.filter(({ id }) => id != car.id);
-        //this.storageService.remove(wine);
+        this.local.remove(car);
+        this.dixie.remove(car);
         this._commit(this.cars);
     }
     updateCar(car) {
-        console.log("en el servico",car);
-        console.log("en el servico",new Car(car) );
-        console.log("original",this.cars );
+        console.log(new Car(car) );
         this.cars = this.cars.map((_car) =>
         _car.id === car.id ? new Car(car) : _car);
-        //this.storageService.update(car);
-        console.log("modificado",this.cars );
+        this.local.update(car);
+        this.dixie.update(car);
         this._commit(this.cars);
     }
 

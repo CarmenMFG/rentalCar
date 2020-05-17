@@ -1,6 +1,6 @@
 class Car{
-    constructor ({registration,brand,model,color,price,garaje}){
-        this.id=registration;
+    constructor ({id,brand,model,color,price,garaje}){
+        this.id=id;
         this.brand=brand;
         this.model=model;
         this.color=color;
