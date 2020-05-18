@@ -1,10 +1,10 @@
 const storageServiceLocal = new StorageService({
     type: 'localStorage', //localstorage o indexedDB o dixie
-    configuration: { key: 'id', db:'garaje' }
+    configuration: { key: 'id', db:'garage' }
   });
  const storageServiceDixie= new StorageService({
     type: 'dixie', //localstorage o indexedDB o dixie
-    configuration: { key: 'id', db:'garaje'},
+    configuration: { key: 'id', db:'garage'},
     
   });
   const validation=new ValidationService();

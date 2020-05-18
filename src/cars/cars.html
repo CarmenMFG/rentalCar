@@ -64,16 +64,18 @@
                       </div>
                       <div class="form-group">
                         <label>Color</label>
-                        <input type='text'  class="form-control-file" id="txtColor">
+                        <input type='text'  class="form-control" id="txtColor">
                       </div>
                       <div class="form-group">
                           <label>Price</label>
-                          <input type='text'  class="form-control-file" id="txtPrice">
+                          <input type='text'  class="form-control" id="txtPrice">
                         </div>
                         <div class="form-group">
                           <label>Garaje</label>
-                          <input type='text'  class="form-control-file" id="txtGaraje" value="Garaje1">
+                          <select class="form-control" id="txtGaraje">
+                          </select>
                         </div>
+                        
                       </div>
                     <div class="formFooter mt-5">
                       <input type="submit" class="btn btn-success " id="add" value="Add">
@@ -111,6 +113,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     <script src="../../shared/models/cars.model.js"></script>
+    <script src="../../shared/models/garage.model.js"></script>
     <script src="../../shared/models/bookins.model.js"></script>  
     <script src="../../shared/services/storage.service.js"></script>
     <script src="../../shared/services/form.constants.js"></script>

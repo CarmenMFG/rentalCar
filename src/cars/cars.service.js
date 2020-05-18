@@ -1,19 +1,24 @@
 class CarService {
-    constructor(local,dixie) {
+    constructor(local,dixie,localGarage) {
         this.local=local;
         this.dixie=dixie;
+        this.localGarage=localGarage;
         this.cars=[];
+        this.garages=[];
         
     } 
     async loadCarsAwait() {
-        console.log(this.dixie);
-       const cars = await this.dixie.find();
-       console.log("cars",cars);
-       this.cars=cars;
-      // this.cars = (cars || []).map(car => new Car(car));
+       const cars = await this.local.find();
+      // this.cars=cars;
+       this.cars = (cars || []).map(car => new Car(car));
        return this.cars;
     }
-    bindCarListChanged(callback) {
+    async loadGaragesAwait(){
+        const garages= await this.localGarage.find();
+        this.garages = (garages||[]).map(garage => new Garage(garage));
+        return this.garages;
+    }
+     bindCarListChanged(callback) {
         this.onCarListChanged = callback;
     }
     _commit(cars) {

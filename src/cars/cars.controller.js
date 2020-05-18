@@ -10,18 +10,24 @@ class CarController {
         this.view.bindUpdateCar(this.handlerUpdateCar);
         this.service.bindCarListChanged(this.onCarListChanged);
         this.view.bindResetForm();
+
+
         this.view.bindClickAddForm();
         // Display initial users
         this.onCarListChanged(this.service.cars);
+        this.onGarageListChanged(this.service.garages);
+    }
+    onGarageListChanged=(garages)=>{
+        this.view.displayGarages(garages);
     }
     onCarListChanged = (cars) => {
         this.view.displayCars(cars);
     };
 
-    handleAddCar = ({brand,model,color,garaje,price}) => {
+    handleAddCar = ({id,brand,model,color,garaje,price}) => {
         let valid=false;
-        if (this.serviceValidation.validateFieldText({brand,model,color,garaje})){
-         this.service.addCar({brand,model,color,garaje,price});
+        if (this.serviceValidation.validateFieldText({id,brand,model,color,garaje})){
+         this.service.addCar({id,brand,model,color,garaje,price});
          valid=true;
         }
         this.view.showResponse(valid);
@@ -34,16 +40,10 @@ class CarController {
         let car = this.service.findCarById(idCar);
         this.view.completeForm(car);
     }
-    handlerUpdateCar = ({brand,model,color,garaje,price}) => {
+    handlerUpdateCar = ({id,brand,model,color,garaje,price}) => {
         let valid=false;
-        /*console.log("brand",brand);
-        console.log("model",model);
-        console.log("color",color);
-        console.log("garaje",garaje);
-        console.log("precio",price);*/
-
         if (this.serviceValidation.validateFieldText({brand,model,color,garaje})){ 
-            this.service.updateCar({brand,model,color,garaje,price});
+            this.service.updateCar({id,brand,model,color,garaje,price});
             valid=true;
          }
          this.view.showResponse(valid);

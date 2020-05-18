@@ -6,11 +6,10 @@ class GarageService {
         
     } 
     async loadGaragesAwait() {
-        console.log(this.dixie);
-       const garages = await this.dixie.find();
+       const garages = await this.local.find();
        console.log("garages",garages);
-       this.garages=garages;
-      // this.garages = (garages || []).map(garage => new Garage(garage));
+      // this.garages=garages;
+       this.garages = (garages || []).map(garage => new Garage(garage));
        return this.garages;
     }
     bindGarageListChanged(callback) {

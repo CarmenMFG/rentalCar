@@ -36,12 +36,6 @@ class GarageController {
     }
     handlerUpdateGarage = ({id,address}) => {
         let valid=false;
-        /*console.log("brand",brand);
-        console.log("model",model);
-        console.log("color",color);
-        console.log("garaje",garaje);
-        console.log("precio",price);*/
-
         if (this.serviceValidation.validateFieldText({id,address})){ 
             this.service.updateGarage({id,address});
             valid=true;

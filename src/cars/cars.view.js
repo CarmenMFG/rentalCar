@@ -19,7 +19,7 @@ class CarView{
          this.txtPrice=document.getElementById('txtPrice');
          this.txtGaraje=document.getElementById('txtGaraje');
          this.titleForm=document.getElementById("titleForm");
-         //Modal
+        //Modal
          this.info=document.getElementById("#id");
 
     }
@@ -42,6 +42,15 @@ class CarView{
          this.carsCards.append(html);   
         });                    
                 
+     }
+     displayGarages(garages){
+          let html;
+         garages.forEach((garage)=>{
+            html =document.createElement("option");
+            html.innerHTML=garage.id;
+            this.txtGaraje.append(html);
+        })
+      
      }
      _resetInputs(){
         this.txtRegistration.value="";
@@ -69,6 +78,7 @@ class CarView{
                  price:this.txtPrice.value,
                  garaje:this.txtGaraje.value
                 }
+                console.log(car);
             handler(car);
            
         })
