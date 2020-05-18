@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BackOffice Car</title>
+<title>BackOffice Garage</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,7 +19,7 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-6">
-                                <h2>Manage <b>CARS</b></h2>
+                                <h2>Manage <b>Garage</b></h2>
                                 </div>
                                 <div id="btnShowForm" class="col-sm-6">
                                 <a href="" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Wine</span></a>
@@ -29,52 +29,32 @@
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>Registration</th>
-                                <th>Brand</th>    
-                                <th >Model</th>
-                                <th>Color</th>
-                                <th>Price</th>
-                                <th>Garage</th>
+                                <th>Name</th>
+                                <th>Address</th>    
                                 <th></th>
 
                             </tr>
                             </thead>
-                            <tbody id="carsCards"></tbody>
+                            <tbody id="garagesCards"></tbody>
                         </table>
                     </div>   
             </div> 
             
-            <div class="col-4" id="manageCars">
+            <div class="col-4" id="manageGarage">
                 <form>
                     <div class="formHeader">						
                       <h4 id="titleForm"></h4>
                      </div>
                     <div>					
                       <div class="form-group">
-                        <label>Registration</label>
-                        <input id="txtRegistration" type="text" class="form-control" required>
+                        <label>Name</label>
+                        <input id="txtName" type="text" class="form-control" required>
                       </div>
                       <div class="form-group">
-                        <label>Brand</label>
-                        <input id="txtBrand" type="text" class="form-control" required>
+                        <label>Address</label>
+                        <input id="txtAddress" type="text" class="form-control" required>
                       </div>
-                      <div class="form-group">
-                        <label>Model</label>
-                        <input type="textr" class="form-control" id="txtModel" required>
-                      </div>
-                      <div class="form-group">
-                        <label>Color</label>
-                        <input type='text'  class="form-control-file" id="txtColor">
-                      </div>
-                      <div class="form-group">
-                          <label>Price</label>
-                          <input type='text'  class="form-control-file" id="txtPrice">
-                        </div>
-                        <div class="form-group">
-                          <label>Garaje</label>
-                          <input type='text'  class="form-control-file" id="txtGaraje" value="Garaje1">
-                        </div>
-                      </div>
+                    </div>               
                     <div class="formFooter mt-5">
                       <input type="submit" class="btn btn-success " id="add" value="Add">
                       <input type="submit" class="btn btn-success" id="update" value="Update">
@@ -110,14 +90,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
-    <script src="../../shared/models/cars.model.js"></script>
+    <script src="../../shared/models/garage.model.js"></script>
     <script src="../../shared/models/bookins.model.js"></script>  
     <script src="../../shared/services/storage.service.js"></script>
     <script src="../../shared/services/form.constants.js"></script>
     <script src="../../shared/services/validation.service.js"></script>
-    <script src="cars.service.js"></script>
-    <script src="cars.view.js"></script>
-    <script src="cars.controller.js"></script>
+    <script src="garages.service.js"></script>
+    <script src="garages.view.js"></script>
+    <script src="garages.controller.js"></script>
     <script src="app.js"></script>
 </body>
 </html>  

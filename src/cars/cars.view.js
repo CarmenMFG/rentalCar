@@ -19,6 +19,8 @@ class CarView{
          this.txtPrice=document.getElementById('txtPrice');
          this.txtGaraje=document.getElementById('txtGaraje');
          this.titleForm=document.getElementById("titleForm");
+         //Modal
+         this.info=document.getElementById("#id");
 
     }
     displayCars(cars){
@@ -132,13 +134,20 @@ class CarView{
                  price:this.txtPrice.value,
                  garaje:this.txtGaraje.value
              }
-             console.log(carUpdate);
              handler(carUpdate);
-             this._resetInputs();
-             this.manageCars.style.display = 'none';
-             
          })
     } 
+    showResponse(valid){
+        let modal='show';
+        if (valid){
+            this._resetInputs();
+            this.manageCars.style.display = 'none';
+            modal='hide';
+        }
+         $('#info').modal(modal);	
+        
+    }
+
   
 
 }        

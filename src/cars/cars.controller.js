@@ -18,18 +18,14 @@ class CarController {
         this.view.displayCars(cars);
     };
 
-    handleAddCar = (carObject) => {
-     console.log(Object.values(carObject));
-       if (this.serviceValidation.validateFieldText(Object.values(carObject))){
-         this.service.addCar(carObject);
-         this.view._resetInputs();
-         this.view.manageCars.style.display = 'none';
-       }else{
-       alert("Campos no completados");
-       }
-
-        this.service.addCar(carObject);
-    };
+    handleAddCar = ({brand,model,color,garaje,price}) => {
+        let valid=false;
+        if (this.serviceValidation.validateFieldText({brand,model,color,garaje})){
+         this.service.addCar({brand,model,color,garaje,price});
+         valid=true;
+        }
+        this.view.showResponse(valid);
+     };
     handlerDeleteCar = (idCar) => {
         let car = this.service.findCarById(idCar);
         this.service.deleteCar(car);
@@ -38,8 +34,19 @@ class CarController {
         let car = this.service.findCarById(idCar);
         this.view.completeForm(car);
     }
-    handlerUpdateCar = (car) => {
-        this.service.updateCar(car);
+    handlerUpdateCar = ({brand,model,color,garaje,price}) => {
+        let valid=false;
+        /*console.log("brand",brand);
+        console.log("model",model);
+        console.log("color",color);
+        console.log("garaje",garaje);
+        console.log("precio",price);*/
+
+        if (this.serviceValidation.validateFieldText({brand,model,color,garaje})){ 
+            this.service.updateCar({brand,model,color,garaje,price});
+            valid=true;
+         }
+         this.view.showResponse(valid);
     }
 
 
