@@ -44,7 +44,8 @@ class CarView{
                 
      }
      displayGarages(garages){
-          let html;
+         let html;
+         this.txtGaraje.innerHTML="";
          garages.forEach((garage)=>{
             html =document.createElement("option");
             html.innerHTML=garage.id;

@@ -126,6 +126,9 @@ body {
   #manageGarage{
     display:none;
   }
+  #manageCustomers{
+    display:none;
+  }
   /** Modal**/
   .modal .modal-dialog {
     max-width: 400px;
