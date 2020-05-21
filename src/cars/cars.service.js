@@ -1,20 +1,21 @@
 class CarService {
-    constructor(local,dixie,localGarage) {
+    CONST_CARS_TABLE='cars';
+    CONST_GARAGES_TABLE='garages';
+    constructor(local,dixie) {
         this.local=local;
         this.dixie=dixie;
-        this.localGarage=localGarage;
         this.cars=[];
         this.garages=[];
         
     } 
     async loadCarsAwait() {
-       const cars = await this.local.find();
+       const cars = await this.local.find(this.CONST_CARS_TABLE);
       // this.cars=cars;
        this.cars = (cars || []).map(car => new Car(car));
        return this.cars;
     }
     async loadGaragesAwait(){
-        const garages= await this.localGarage.find();
+        const garages= await this.local.find(this.CONST_GARAGES_TABLE);
         this.garages = (garages||[]).map(garage => new Garage(garage));
         return this.garages;
     }
@@ -27,8 +28,8 @@ class CarService {
     addCar(car) {
         let carObj = new Car(car)
         this.cars = [...this.cars, carObj];
-        this.local.add(carObj);
-        this.dixie.add(carObj);
+        this.local.add(carObj,this.CONST_CARS_TABLE);
+        this.dixie.add(carObj,this.CONST_CARS_TABLE);
         this._commit(this.cars);
 
     }
@@ -37,17 +38,17 @@ class CarService {
     }
     deleteCar(car) {
         this.cars = this.cars.filter(({ id }) => id != car.id);
-        this.local.remove(car);
-        this.dixie.remove(car);
-        this._commit(this.cars);
+        this.local.remove(car,this.CONST_CARS_TABLE);
+        this.dixie.remove(car,this.CONST_CARS_TABLE);
+        this._commit(this.cars,this.CONST_CARS_TABLE);
     }
     updateCar(car) {
         console.log(new Car(car) );
         this.cars = this.cars.map((_car) =>
         _car.id === car.id ? new Car(car) : _car);
-        this.local.update(car);
-        this.dixie.update(car);
-        this._commit(this.cars);
+        this.local.update(car,this.CONST_CARS_TABLE);
+        this.dixie.update(car,this.CONST_CARS_TABLE);
+        this._commit(this.cars,this.CONST_CARS_TABLE);
     }
 
 

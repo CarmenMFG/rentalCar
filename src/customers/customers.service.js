@@ -20,7 +20,7 @@ class CustomerService {
     }
 
     addCustomer(customer) {
-        console.log("en el add ",customer);
+      
         let customerObj = new Customer(customer)
         this.customers = [...this.customers, customerObj];
         this.local.add(customerObj);
@@ -38,7 +38,6 @@ class CustomerService {
         this._commit(this.customers);
     }
     updateCustomer(customer) {
-        console.log(new Customer(customer) );
         this.customers = this.customers.map((_customer) =>
         _customer.id === customer.id ? new Customer(customer) : _customer);
         this.local.update(customer);

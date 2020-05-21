@@ -19,11 +19,13 @@ class StorageService {
     };
   
     _addDixie = (item, storeName) => {
+      console.log("Add",storeName);  
       this.db[storeName].add(item);
     };
   
     _addLocal = (item, storeName) => {
       let items = this._loadStore(storeName);
+      console.log(item,storeName,"storageService");
       items = [...items, item];
       localStorage.setItem(storeName, JSON.stringify(items));
     };
@@ -118,12 +120,15 @@ class StorageService {
   
     _initializeDixie = (storeName) => {
       if (!this.db) {
+         
         this.db = new Dexie(this.DEXIE_NAME);
         this.db.version(1).stores({
-          cars: 'numberPlate',
-          customers: 'dni',
-          bookings: 'dni',
+          cars: 'id',
+          customers: 'id',
+          bookings: 'id',
+          garages: 'id'
         });
+        console.log("entro por Dixie",this.db);
        Promise.resolve(true);
       }
     };

@@ -1,9 +1,8 @@
 class GarageController {
 
-    constructor(service, view,validation) {
+    constructor(service, view) {
         this.service = service;
         this.view = view;
-        this.serviceValidation=validation;
         this.view.bindAddGarage(this.handleAddGarage);
         this.view.bindDeleteGarage(this.handlerDeleteGarage);
         this.view.bindClickTrUpdate(this.handlerClickTrUpdate);
@@ -18,12 +17,11 @@ class GarageController {
         this.view.displayGarages(garages);
     };
 
-    handleAddGarage = ({id,address}) => {
+    handleAddGarage = (garage) => {
         let valid=false;
-        if (this.serviceValidation.validateFieldText({id,address})){
-         this.service.addGarage({id,address});
+        this.service.addGarage(garage);
          valid=true;
-        }
+     
         this.view.showResponse(valid);
      };
     handlerDeleteGarage = (idGarage) => {
@@ -36,10 +34,10 @@ class GarageController {
     }
     handlerUpdateGarage = ({id,address}) => {
         let valid=false;
-        if (this.serviceValidation.validateFieldText({id,address})){ 
+      
             this.service.updateGarage({id,address});
             valid=true;
-         }
+       
          this.view.showResponse(valid);
     }
 

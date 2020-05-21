@@ -1,22 +1,21 @@
 const storageServiceLocal = new StorageService({
     type: 'localStorage', //localstorage o indexedDB o dixie
-    configuration: { key: 'id', db:'garage' }
+    configuration: { key: 'id' }
   });
  const storageServiceDixie= new StorageService({
-    type: 'dixie', //localstorage o indexedDB o dixie
-    configuration: { key: 'id', db:'garage'},
+    type: 'dexie', //localstorage o indexedDB o dixie
+    configuration: { key: 'id'},
     
   });
-  const validation=new ValidationService();
- 
+ const GARAGES_TABLE='garages';
  (async () => {
     try {
-        await storageServiceLocal.initializeDB();
-        await storageServiceDixie.initializeDB();
+        await storageServiceLocal.initializeDB(GARAGES_TABLE);
+        await storageServiceDixie.initializeDB(GARAGES_TABLE);
         const garageService = new GarageService(storageServiceLocal,storageServiceDixie);
         const garages = await garageService.loadGaragesAwait();
         const garageView = new GarageView();
-        new GarageController(garageService, garageView,validation);
+        new GarageController(garageService, garageView);
     } catch (error) {
         console.error(error);
    }
