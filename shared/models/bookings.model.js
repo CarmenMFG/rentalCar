@@ -4,7 +4,8 @@ class Booking {
     this.costumer=costumer;
     this.startDate=startDate;
     this.endDate=endDate;
-    this.details=details.map(detail=> new BookinsDetails(detail));
+   // this.details=details.map(detail=> new BookinsDetails(detail));
+   this.details=details;
     this.isDelivered=isDelivered;
     this.totalPrice;//reduce de details.price
 

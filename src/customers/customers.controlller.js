@@ -1,9 +1,8 @@
 class CustomerController {
 
-    constructor(service, view,validation) {
+    constructor(service, view) {
         this.service = service;
         this.view = view;
-        this.serviceValidation=validation;
         this.view.bindAddCustomer(this.handleAddCustomer);
         this.view.bindDeleteCustomer(this.handlerDeleteCustomer);
         this.view.bindClickTrUpdate(this.handlerClickTrUpdate);
@@ -21,12 +20,9 @@ class CustomerController {
     };
 
     handleAddCustomer = ({name,address,phone,dni,endorse}) => {
-       console.log(name,address,phone,dni,endorse);
-        let valid=false;
-        if (this.serviceValidation.validateFieldText({name,address,phone,dni})){
-           this.service.addCustomer({name,address,phone,dni,endorse});
-           valid=true;
-        }
+         this.service.addCustomer({name,address,phone,dni,endorse});
+         let valid=true;
+     
         this.view.showResponse(valid);
      };
     handlerDeleteCustomer = (idCustomer) => {
@@ -38,12 +34,10 @@ class CustomerController {
         this.view.completeForm(customer);
     }
     handlerUpdateCustomer = ({id,name,address,phone,dni,endorse}) => {
-        let valid=false;
-        if (this.serviceValidation.validateFieldText({name,address,phone,dni,endorse})){ 
-            this.service.updateCustomer({id,name,address,phone,dni,endorse});
-            valid=true;
-         }
-         this.view.showResponse(valid);
+         
+          this.service.updateCustomer({id,name,address,phone,dni,endorse});
+          let valid=true;
+          this.view.showResponse(valid);
     }
 
 

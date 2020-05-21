@@ -34,6 +34,7 @@
                                 <th >Model</th>
                                 <th>Color</th>
                                 <th>Price</th>
+                                <th>Gasoline</th>
                                 <th>Garage</th>
                                 <th></th>
 
@@ -69,8 +70,12 @@
                       <div class="form-group">
                           <label>Price</label>
                           <input type='text'  class="form-control" id="txtPrice">
+                       </div>
+                       <div class="form-group">
+                        <label>Gasoline</label>
+                        <input type='text'  class="form-control" id="txtGasoline">
                         </div>
-                        <div class="form-group">
+                       <div class="form-group">
                           <label>Garaje</label>
                           <select class="form-control" id="txtGaraje">
                           </select>
@@ -114,7 +119,6 @@
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     <script src="../../shared/models/cars.model.js"></script>
     <script src="../../shared/models/garage.model.js"></script>
-    <script src="../../shared/models/bookins.model.js"></script>  
     <script src="../../shared/services/storage.service.js"></script>
     <script src="../../shared/services/form.constants.js"></script>
     <script src="../../shared/services/validation.service.js"></script>

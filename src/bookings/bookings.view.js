@@ -3,11 +3,12 @@ class BookingView{
         this.bookingsCards=document.getElementById('bookingsCards');
         this.currentBooking;
         this.btnShowForm=document.getElementById("btnShowForm");
-        this.manageBookings=document.getElementById("manageBookings");
+        this.manageBookings=document.getElementById("manageBooking");
         this.cars=document.getElementById("cars");// Tabla de las cars Pairing cdo hace el updat
         this.listReservedCars=[];
 
        //Formulario
+       this.titleForm=document.getElementById("titleForm");
         this.txtCustomer=document.getElementById('txtCustomer');
         this.txtStartDate=document.getElementById('txtStartDate');
         this.txtEndDate=document.getElementById('txtEndDate');
@@ -49,7 +50,7 @@ class BookingView{
         });                    
                
     }
-    displayCustomers(customers){//cuando se elige en el option un customer se coge el DNI
+  displayCustomers(customers){//cuando se elige en el option un customer se coge el DNI
         let optionCustomer;
         this.txtCustomer.innerHTML="";
          customers.forEach((customer)=>{
@@ -59,7 +60,7 @@ class BookingView{
         this.txtCustomer.append(optionCustomer);
       })
      }
-     displayCars(cars){//cuando se elige en el option un car se coge el stringfy de
+   /*  displayCars(cars){//cuando se elige en el option un car se coge el stringfy de
         let optionCar;
         this.txtCar.innerHTML="";
          cars.forEach((car)=>{
@@ -68,7 +69,7 @@ class BookingView{
             optionCar.setAttribute("label",car.id+ " - "+ car.brand + car.model);
         this.txtCar.append(optionCar);
       })
-     }
+     }*/
     
     _resetInputs(){
         this.txtCustomer.value="";

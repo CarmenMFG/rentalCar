@@ -18,6 +18,7 @@ class CarView{
          this.txtColor=document.getElementById('txtColor');
          this.txtPrice=document.getElementById('txtPrice');
          this.txtGaraje=document.getElementById('txtGaraje');
+         this.txtGasoline=document.getElementById('txtGasoline');
          this.titleForm=document.getElementById("titleForm");
         //Modal
          this.info=document.getElementById("#id");
@@ -34,6 +35,7 @@ class CarView{
                              <td>${car.model}</td>
                              <td>${car.color}</td>
                              <td>${car.price}€</td>
+                             <td>${car.gasoline}</td>
                              <td>${car.garaje}</td>
                              <td>
                              <a class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -60,6 +62,7 @@ class CarView{
         this.txtColor.value="";
         this.txtPrice.value="";
         this.txtGaraje.value="";
+        this.txtGasoline.value="";
         this.titleForm.innerHTML="Cars Form";
         this.currentCar="";
         this.update.disabled=false;
@@ -77,6 +80,7 @@ class CarView{
                  model:this.txtModel.value,
                  color:this.txtColor.value,
                  price:this.txtPrice.value,
+                 gasoline:this.txtGasoline.value,
                  garaje:this.txtGaraje.value
                 }
                 console.log(car);
@@ -126,12 +130,13 @@ class CarView{
          }
         })  
      }
-     completeForm({id,brand,model,color,price,garaje}){
+     completeForm({id,brand,model,color,price,gasoline,garaje}){
         this.txtRegistration.value=id;
         this.txtBrand.value=brand;
         this.txtModel.value=model;
         this.txtColor.value=color;
         this.txtPrice.value=price;
+        this.txtGasoline.value=gasoline;
         this.txtGaraje.value=garaje;
     }
     bindUpdateCar(handler){
@@ -143,6 +148,7 @@ class CarView{
                  model:this.txtModel.value,
                  color:this.txtColor.value,
                  price:this.txtPrice.value,
+                 gasoline: this.txtGasoline.value,
                  garaje:this.txtGaraje.value
              }
              handler(carUpdate);

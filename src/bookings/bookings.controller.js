@@ -12,17 +12,17 @@ class BookingController {
         this.view.bindClickAddForm();
         // Display initial users
         this.onBookingListChanged(this.service.bookings);
-        this.onCustomerListChanged(this.service.customers);
-    /*    this.onCarListChanged(this.service.cars);*/
+      /*  this.onCustomerListChanged(this.service.customers);
+        this.onCarListChanged(this.service.cars);*/
      }
    
     onBookingListChanged = (bookings) => {
         this.view.displayBookings(bookings);
     };
-     onCustomerListChanged = (customers) => {
+    /*  onCustomerListChanged = (customers) => {
         this.view.displayCustomers(customers);
     };
-   /* onCarListChanged = (cars) => {
+   onCarListChanged = (cars) => {
         this.view.displayCars(cars);
     };*/
 

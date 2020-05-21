@@ -7,11 +7,11 @@ const storageServiceLocal = new StorageService({
     configuration: { key: 'id'},
     
   });
- const GARAGES_TABLE='garages';
+
  (async () => {
     try {
-        await storageServiceLocal.initializeDB(GARAGES_TABLE);
-        await storageServiceDixie.initializeDB(GARAGES_TABLE);
+        await storageServiceLocal.initializeDB();
+        await storageServiceDixie.initializeDB();
         const garageService = new GarageService(storageServiceLocal,storageServiceDixie);
         const garages = await garageService.loadGaragesAwait();
         const garageView = new GarageView();

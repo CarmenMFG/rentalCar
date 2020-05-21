@@ -108,17 +108,17 @@ class StorageService {
   
     /** -----  Inicializar -----------  */
   
-    initializeDB = (storeName) => {
+    initializeDB = () => {
       return this.type === this.DIXIE
-        ? this._initializeDixie(storeName)
-        : this._initializeLocalStorage(storeName);
+        ? this._initializeDixie()
+        : this._initializeLocalStorage();
     };
   
-    _initializeLocalStorage(storeName) {
+    _initializeLocalStorage() {
          return Promise.resolve(true);
     }
   
-    _initializeDixie = (storeName) => {
+    _initializeDixie = () => {
       if (!this.db) {
          
         this.db = new Dexie(this.DEXIE_NAME);
