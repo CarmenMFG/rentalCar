@@ -1,8 +1,8 @@
 class ValidationService{
-      validateFieldText( wordsObject ={}) {
-         let words=Object.values(wordsObject);
+      validateFieldText(name="") {
+        // let words=Object.values(wordsObject);
         // return words.reduce((result,current)=>result &&  REGEXP.FIELDTEXT.test(current),true)
-        return true
+        return REGEXP.FIELDTEXT.test(name);
       }
       validateDate(date=""){
         return REGEXP.ADDRESS.test(date);

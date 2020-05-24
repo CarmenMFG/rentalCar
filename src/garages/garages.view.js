@@ -16,7 +16,8 @@ class GarageView{
          this.txtAddress=document.getElementById('txtAddress');
          this.titleForm=document.getElementById("titleForm");
          //Modal
-         this.info=document.getElementById("#id");
+         this.error=document.getElementById("modalMsg");
+
 
     }
     displayGarages(garages){
@@ -48,12 +49,21 @@ class GarageView{
    
         this.add.addEventListener("click",event=>{
            event.preventDefault();  
-           const garage={
-                 id: this.txtName.value,
-                 address:this.txtAddress.value,
-                 }
-            handler(garage);
-           
+          try{
+            const garage={
+                    id: this.txtName.value,
+                    address:this.txtAddress.value,
+                    };
+                handler(garage);
+                this._resetInputs();
+                this.manageGarages.style.display = 'none';
+               
+            }
+            catch (error){
+                $('#modalMsg').append(error);
+                $('#info').modal();
+          
+           } 
         })
     }
     bindResetForm(){
@@ -113,14 +123,13 @@ class GarageView{
              handler(garageUpdate);
          })
     } 
-    showResponse(valid){
+    showResponse(error){
         let modal='show';
-        if (valid){
-            this._resetInputs();
-            this.manageGarages.style.display = 'none';
-            modal='hide';
+        if (error=""){
+        
         }
-         $('#info').modal(modal);	
+        alert("Los errores son"+error);
+        // $('#info').modal(modal);	
         
     }
 

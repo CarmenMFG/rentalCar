@@ -18,11 +18,8 @@ class GarageController {
     };
 
     handleAddGarage = (garage) => {
-        let valid=false;
-        this.service.addGarage(garage);
-         valid=true;
+       this.service.addGarage(garage);
      
-        this.view.showResponse(valid);
      };
     handlerDeleteGarage = (idGarage) => {
         let garage = this.service.findGarageById(idGarage);

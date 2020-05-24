@@ -7,12 +7,13 @@ const storageServiceLocal = new StorageService({
     configuration: { key: 'id'},
     
   });
+  const validation=new ValidationService();
 
  (async () => {
     try {
         await storageServiceLocal.initializeDB();
         await storageServiceDixie.initializeDB();
-        const garageService = new GarageService(storageServiceLocal,storageServiceDixie);
+        const garageService = new GarageService(storageServiceLocal,storageServiceDixie,validation);
         const garages = await garageService.loadGaragesAwait();
         const garageView = new GarageView();
         new GarageController(garageService, garageView);

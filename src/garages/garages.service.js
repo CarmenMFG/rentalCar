@@ -1,8 +1,9 @@
 class GarageService {
     CONST_GARAGES_TABLE='garages';
-    constructor(local,dixie) {
+    constructor(local,dixie,validation) {
         this.local=local;
         this.dixie=dixie;
+        this.validation=validation;
         this.garages=[];
         
     } 
@@ -13,6 +14,22 @@ class GarageService {
        this.garages = (garages || []).map(garage => new Garage(garage));
        return this.garages;
     }
+
+    _validateData({id,address}){
+        const errors={};
+       if (!this.validation.validateFieldText(id)){
+           errors.ERROR_NAMEINVALID=true;
+       }
+       if (!this.validation.validateFieldText(address)){
+           errors.ERROR_ADDRESSINVALID=true;
+       }
+       if (Object.keys(errors).length>0){
+           throw new GaragesException(errors);
+       } 
+      return true;
+    }
+
+
     bindGarageListChanged(callback) {
         this.onGarageListChanged = callback;
     }
@@ -20,6 +37,7 @@ class GarageService {
         this.onGarageListChanged(garages);
     }
     addGarage(garage) {
+        this._validateData(garage);
        console.log("dixie",this.dixie);
         let garageObj = new Garage(garage)
         this.garages = [...this.garages, garageObj];

@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div  class="col-8">
+            <div  class="col-9">
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
@@ -32,7 +32,8 @@
                                 <th>Costumer</th>
                                 <th>Start Date</th>    
                                 <th>End Date</th>
-                                <th>Cars - Is Delivered</th>
+                                <th>Cars </th>
+                                <th>Delivered</th>
                                 <th>Total</th>
                             </tr>
                             </thead>
@@ -41,7 +42,7 @@
                     </div>   
             </div> 
             
-            <div class="col-4" id="manageBooking">
+            <div class="col-3" id="manageBooking">
                 <form>
                     <div class="formHeader">						
                       <h4 id="titleForm"></h4>
@@ -54,16 +55,30 @@
                       <div class="form-group">
                         <label>Start Date</label>
                         <input type="date" id="txtStartDate" name="txtStartDate">
-                     </div>
+                      </div>
                       <div class="form-group">
                         <label>End Date</label>
                         <input type="date" id="txtEndDate" name="txtEndDate">
                       </div>
-                      <div class="mt-5">
-                        <label>Reserved Cars</label>
-                        <table id="cars"></table>
-                      </div>	
                       <div class="form-group">
+                        <label class="form-check-label" id="lblDelivered" for="chkDelivered">Is Delivered</label>
+                        <input class="form-check-input ml-3" type="checkbox" id="chkDelivered" value="isDelivered">
+                      
+                      </div>
+      
+                      <div class="mt-2">
+                        <label><h6>Reserved Cars</h6></label>
+                        <table width="100%">
+                           <thead>
+                            <thead><tr>
+                                <th>Registration</th>
+                                <th>Price</th>
+                                <th>Gasoline</th>
+                             </tr></thead>
+                             <tbody id="cars"></tbody>
+                           </table>
+                      </div>	
+                      <div class="form-group mt-2">
                         <label><a href="#addCar" class="linkCar" data-toggle="modal">
                             + Add New Car</a></label>
                      </div>
@@ -113,14 +128,14 @@
               <div class="modal-body">					
                <div class="row">
                   <div class="form-group col">
-                    <label>Search a car</label>
-                    <select class="form-control" id="modalIdCar">
+                      <label>Search a car</label>
+                      <select class="form-control" id="modalIdCar">
                    </div>
-             </div>  
-                                             
-              <div class="modal-footer">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <input type="submit" class="btn btn-success" id="btnAddCar" value="Add">
+              </div>  
+              </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default ml-5 mt-3" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-success  mt-3" id="btnAddCar" value="Add">
               </div>
             </form>
           </div>

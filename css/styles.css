@@ -129,6 +129,9 @@ body {
   #manageCustomers{
     display:none;
   }
+  #manageBooking{
+    display:none;
+  }
   /** Modal**/
   .modal .modal-dialog {
     max-width: 400px;
@@ -178,6 +181,9 @@ body {
   a.linkFood{
    color:#435d7d;
    font-weight: bold;
+  }
+  .noVisible{
+    display:none;
   }
  
   

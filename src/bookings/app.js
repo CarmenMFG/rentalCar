@@ -14,9 +14,8 @@ const storageServiceLocal = new StorageService({
           
         const bookingService = new BookingService(storageServiceLocal,storageServiceDixie);
         const booking= await bookingService.loadBookingsAwait();
-      /*  const customer = await bookingService.loadCustomersAwait() 
-       console.log("desde el app",bookingService);
-       const cars=await bookingService.loadCarsAwait();*/
+        const customer = await bookingService.loadCustomersAwait() 
+        const cars=await bookingService.loadCarsAwait();
         const bookingView = new BookingView();
         new BookingController(bookingService, bookingView);
     } catch (error) {

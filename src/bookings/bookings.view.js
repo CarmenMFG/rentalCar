@@ -12,6 +12,8 @@ class BookingView{
         this.txtCustomer=document.getElementById('txtCustomer');
         this.txtStartDate=document.getElementById('txtStartDate');
         this.txtEndDate=document.getElementById('txtEndDate');
+        this.chkDelivered=document.getElementById('chkDelivered');
+        this.lblDelivered=document.getElementById('lblDelivered');
       
         //Botones
         this.update=document.getElementById('update');
@@ -23,9 +25,11 @@ class BookingView{
        this.addCar=document.getElementById("addCar");
        this.modalIdCar=document.getElementById("modalIdCar");
        this.btnAddCar=document.getElementById("btnAddCar");
+ 
   }
   
   displayBookings(bookings){
+  
        //borro todos los vinos
         this.bookingsCards.innerHTML="";
        //Escribir todos los vinos..
@@ -35,13 +39,15 @@ class BookingView{
             htmlBooking.id=booking.id;
             let listCar=""; //Para mostrar las matrículas de los coches reservados
             for (let car of booking.details){
-            listCar+=car.id + " ";
+               listCar+=car.id + "<br> ";
             }
-            htmlBooking.innerHTML=` <td>${booking.customer}</td>
+            let isdelivered=booking.isDelivered ?"<i class='material-icons'>done</i>" : "" ;
+             htmlBooking.innerHTML=` <td>${booking.customer}</td>
                                     <td>${booking.startDate}</td>
                                     <td>${booking.endDate}</td>
                                     <td>${listCar}</td>
-                                    <td>${booking.price}€</td>
+                                    <td>${isdelivered}</td>
+                                    <td>${booking.totalPrice}€</td>
                                     <td>
                                     <a class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                     <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -51,25 +57,26 @@ class BookingView{
                
     }
   displayCustomers(customers){//cuando se elige en el option un customer se coge el DNI
+        console.log(this.btnAddCar);
         let optionCustomer;
         this.txtCustomer.innerHTML="";
-         customers.forEach((customer)=>{
+        customers.forEach((customer)=>{
             optionCustomer =document.createElement("option");
             optionCustomer.setAttribute("value",customer.dni);
             optionCustomer.setAttribute("label",customer.name + " - "+ customer.dni);
         this.txtCustomer.append(optionCustomer);
       })
      }
-   /*  displayCars(cars){//cuando se elige en el option un car se coge el stringfy de
+     displayCars(cars){//cuando se elige en el option un car se coge el stringfy de
         let optionCar;
-        this.txtCar.innerHTML="";
+        this.modalIdCar.innerHTML="";
          cars.forEach((car)=>{
             optionCar =document.createElement("option");
             optionCar.setAttribute("value",JSON.stringify(car));
             optionCar.setAttribute("label",car.id+ " - "+ car.brand + car.model);
-        this.txtCar.append(optionCar);
+        this.modalIdCar.append(optionCar);
       })
-     }*/
+     }
     
     _resetInputs(){
         this.txtCustomer.value="";
@@ -89,7 +96,7 @@ class BookingView{
    
         this.add.addEventListener("click",event=>{
            event.preventDefault();  
-           const booking={
+            const booking={
                 id:null,
                 customer : this.txtCustomer.value,
                 startDate : this.txtStartDate.value,
@@ -113,10 +120,11 @@ class BookingView{
          event.preventDefault();  
          if (event.target.parentElement.className=='edit'){
              this.currentBooking=event.target.parentElement.parentElement.parentElement.id;
-             console.log("el booking es"+this.currentBooking);
              handler(this.currentBooking);
              this.titleForm.innerHTML="Update <b>Booking</b>";
              this.manageBookings.style.display = 'block';
+             this.chkDelivered.style.display='block';
+             this.lblDelivered.style.display='block';
              this.add.disabled=true;
              this.update.disabled=false;
             
@@ -133,14 +141,13 @@ class BookingView{
          }
         })  
      }
-
- 
-   completeForm({customer,startDate,endDate,details,isDelivered}){
+    completeForm({customer,startDate,endDate,details,isDelivered}){
         this.txtCustomer.value=customer;
         this.txtStartDate.value=startDate;
         this.txtEndDate.value=endDate;
        //this.listReservedCars=foodPairing.map(({id,...rest}) => ({...rest}));
         this.listReservedCars=details;
+        this.chkDelivered.checked=isDelivered;
         this.completeTableCars();
 
     }
@@ -159,7 +166,7 @@ class BookingView{
         });                   
 
     }
-    bindDeletecar(){
+    bindDeleteCar(){
        this.cars.addEventListener("click",event=>{
        event.preventDefault();  
        let idCar=event.target.id;
@@ -175,11 +182,12 @@ class BookingView{
             let bookingUpdate={
                  id: this.currentBooking,
                  customer : this.txtCustomer.value,
-                 startDate: this.startDate,
-                 endDate:this.endDate,
-                 isDelivered:false,//Estoy hay q cambiarlo por un check acordarse!!!
+                 startDate: this.txtStartDate.value,
+                 endDate:this.txtEndDate.value,
+                 isDelivered:this.chkDelivered.checked,
                  details : this.listReservedCars
              }
+             console.log("desde el update",bookingUpdate);
            
              handler(bookingUpdate);
              this._resetInputs();
@@ -192,6 +200,8 @@ class BookingView{
             event.preventDefault();  
             this._resetInputs();  
             this.titleForm.innerHTML="Add <b>Booking</b>";
+            this.chkDelivered.style.display='none';
+            this.lblDelivered.style.display='none';
             this.manageBookings.style.display = 'block';
             this.update.disabled=true;
             this.add.disabled=false;
@@ -200,23 +210,29 @@ class BookingView{
     } 
     bindAddCar(){
         this.btnAddCar.addEventListener("click",event=>{
-            event.preventDefault();  
-            const car={
-                id :  this.modalNameFood.value
-              /*  price : this.modalkcalFood.value,
-                gasoline : this.chkVegan.checked,*/
-                          
-            }
-           this._deleteFieldsAddCarModal();
-           $('#addCar').modal('hide');
-           this.listReservedCars=[...this.listReservedCars,car]; 
-           this.completeTableCars();
+             event.preventDefault();  
+            let car=JSON.parse(this.modalIdCar.value);
+            this._deleteFieldsAddCarModal();
+            $('#addCar').modal('hide');
+            this.listReservedCars=[...this.listReservedCars,car]; 
+            this.completeTableCars();
         }
         )
     }
-    _deleteFieldsAddFoodModal(){
+    _deleteFieldsAddCarModal(){
 		this.modalIdCar.value = ""; 
      }
+     showResponse(valid){
+        let modal='show';
+        if (valid){
+            this._resetInputs();
+            this.manageBookings.style.display = 'none';
+            modal='hide';
+        }
+         $('#info').modal(modal);	
+        
+    }
+
   
 }
     

@@ -19,13 +19,11 @@ class StorageService {
     };
   
     _addDixie = (item, storeName) => {
-      console.log("Add",storeName);  
-      this.db[storeName].add(item);
+       this.db[storeName].add(item);
     };
   
     _addLocal = (item, storeName) => {
       let items = this._loadStore(storeName);
-      console.log(item,storeName,"storageService");
       items = [...items, item];
       localStorage.setItem(storeName, JSON.stringify(items));
     };
@@ -128,7 +126,7 @@ class StorageService {
           bookings: 'id',
           garages: 'id'
         });
-        console.log("entro por Dixie",this.db);
+      
        Promise.resolve(true);
       }
     };

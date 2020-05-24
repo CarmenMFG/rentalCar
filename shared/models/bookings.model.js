@@ -1,13 +1,14 @@
 class Booking {
-  constructor({id,costumer,startDate,endDate,details,isDelivered}){
+  constructor({id,customer,startDate,endDate,details,isDelivered}){
     this.id= id== null ? this.uuidv4() : id;
-    this.costumer=costumer;
+    this.customer=customer;
     this.startDate=startDate;
     this.endDate=endDate;
    // this.details=details.map(detail=> new BookinsDetails(detail));
-   this.details=details;
+    this.details=details;
     this.isDelivered=isDelivered;
-    this.totalPrice;//reduce de details.price
+    this.totalPrice=this.details.reduce((result,{price})=>result+parseInt(price),0);
+   
 
 }
 uuidv4() {

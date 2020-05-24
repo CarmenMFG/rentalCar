@@ -74,17 +74,22 @@ class CarView{
    
         this.add.addEventListener("click",event=>{
            event.preventDefault();  
-           const car={
-                 id: this.txtRegistration.value,
-                 brand:this.txtBrand.value,
-                 model:this.txtModel.value,
-                 color:this.txtColor.value,
-                 price:this.txtPrice.value,
-                 gasoline:this.txtGasoline.value,
-                 garaje:this.txtGaraje.value
-                }
-                console.log(car);
-            handler(car);
+            try{
+            const car={
+                    id: this.txtRegistration.value,
+                    brand:this.txtBrand.value,
+                    model:this.txtModel.value,
+                    color:this.txtColor.value,
+                    price:this.txtPrice.value,
+                    gasoline:this.txtGasoline.value,
+                    garaje:this.txtGaraje.value
+                    }
+                    console.log(car);
+                handler(car);
+            }
+            catch (error){
+                 alert(error);
+           } 
            
         })
     }
