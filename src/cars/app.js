@@ -6,13 +6,13 @@
     type: 'dexie', //localstorage o indexedDB o dixie
     configuration: { key: 'id'}
   });
-
+  const validation=new ValidationService();
  
  (async () => {
     try {
         await storageServiceLocal.initializeDB();
         await storageServiceDixie.initializeDB();
-        const carService = new CarService(storageServiceLocal,storageServiceDixie);
+        const carService = new CarService(storageServiceLocal,storageServiceDixie,validation);
         const cars = await carService.loadCarsAwait();
         const garages=await carService.loadGaragesAwait();
         const carView = new CarView();

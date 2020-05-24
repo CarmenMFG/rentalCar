@@ -1,6 +1,10 @@
 class CarsException extends Error{
     msgError={ERROR_NAMEINVALID:"Name no valid ",
-    ERROR_ADDRESSINVALID:"Address no valid"}; 
+    ERROR_BRANDINVALID:"Brand no valid",
+    ERROR_MODELINVALID:" Model no valid",
+    ERROR_COLORINVALID:"Color no valid",
+    ERROR_GARAGEINVALID:"Garage no valid"
+}; 
     constructor(value,msg="carExceptions:Error not found"){
        super();
        this.message=this.handlerError(value,msg);

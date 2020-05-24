@@ -60,6 +60,7 @@ class GarageView{
                
             }
             catch (error){
+                $('#modalMsg').append("");
                 $('#modalMsg').append(error);
                 $('#info').modal();
           

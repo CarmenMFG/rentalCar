@@ -20,9 +20,7 @@ class CarView{
          this.txtGaraje=document.getElementById('txtGaraje');
          this.txtGasoline=document.getElementById('txtGasoline');
          this.titleForm=document.getElementById("titleForm");
-        //Modal
-         this.info=document.getElementById("#id");
-
+      
     }
     displayCars(cars){
         this.carsCards.innerHTML="";
@@ -84,11 +82,14 @@ class CarView{
                     gasoline:this.txtGasoline.value,
                     garaje:this.txtGaraje.value
                     }
-                    console.log(car);
-                handler(car);
+               handler(car);
+               this._resetInputs();
+               this.manageCars.style.display = 'none';
             }
             catch (error){
-                 alert(error);
+                $('#modalMsg').append("");
+                $('#modalMsg').append(error);
+                $('#info').modal();
            } 
            
         })

@@ -25,9 +25,7 @@ class CarController {
 
     handleAddCar = ({id,brand,model,color,garaje,price,gasoline}) => {
          this.service.addCar({id,brand,model,color,garaje,price,gasoline});
-         let valid=true;
-       
-        this.view.showResponse(valid);
+        
      };
     handlerDeleteCar = (idCar) => {
         let car = this.service.findCarById(idCar);

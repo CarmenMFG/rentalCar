@@ -1,9 +1,10 @@
 class CarService {
     CONST_CARS_TABLE='cars';
     CONST_GARAGES_TABLE='garages';
-    constructor(local,dixie) {
+    constructor(local,dixie,validation) {
         this.local=local;
         this.dixie=dixie;
+        this.validation=validation;
         this.cars=[];
         this.garages=[];
         
@@ -25,7 +26,33 @@ class CarService {
     _commit(cars) {
         this.onCarListChanged(cars);
     }
+    _validateData({id,brand,model,color,garaje,price,gasoline}){
+        const errors={};
+       if (!this.validation.validateFieldText(id)){
+           errors.ERROR_NAMEINVALID=true;
+       }
+       if (!this.validation.validateFieldText(brand)){
+           errors.ERROR_BRANDINVALID=true;
+       }
+       if (!this.validation.validateFieldText(model)){
+        errors.ERROR_MODELINVALID=true;
+       }
+       if (!this.validation.validateFieldText(color)){
+        errors.ERROR_COLORINVALID=true;
+       }
+       if (!this.validation.validateFieldText(garaje)){
+        errors.ERROR_GARAGEINVALID=true;
+       }
+
+       if (Object.keys(errors).length>0){
+           throw new CarsException(errors);
+       } 
+      return true;
+    }
+
+
     addCar(car) {
+        this._validateData(car);
         let carObj = new Car(car)
         this.cars = [...this.cars, carObj];
         this.local.add(carObj,this.CONST_CARS_TABLE);

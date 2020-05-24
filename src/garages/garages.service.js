@@ -38,7 +38,6 @@ class GarageService {
     }
     addGarage(garage) {
         this._validateData(garage);
-       console.log("dixie",this.dixie);
         let garageObj = new Garage(garage)
         this.garages = [...this.garages, garageObj];
         this.local.add(garageObj,this.CONST_GARAGES_TABLE);
