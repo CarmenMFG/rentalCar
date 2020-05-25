@@ -30,9 +30,8 @@ class BookingController {
         this.view.displayCars(cars);
     };
 
-    handleAddBooking = ({customer,startDate,endDate,details,isDelivered}) => {
-        console.log({customer,startDate,endDate,details,isDelivered});
-           this.service.addBooking({customer,startDate,endDate,details,isDelivered});
+    handleAddBooking = (booking) => {
+           this.service.addBooking(booking);
            let valid=true;
            this.view.showResponse(valid);
      };
@@ -44,10 +43,9 @@ class BookingController {
         let booking = this.service.findBookingById(idBooking);
         this.view.completeForm(booking);
     }
-    handlerUpdateBooking = ({id,customer,startDate,endDate,details,isDelivered}) => {
-         this.service.updateBooking({id,customer,startDate,endDate,details,isDelivered});
-         let valid=true;
-         this.view.showResponse(valid);
+    handlerUpdateBooking = (booking) => {
+         this.service.updateBooking(booking);
+       
     }
 
 

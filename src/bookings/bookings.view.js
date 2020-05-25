@@ -67,7 +67,7 @@ class BookingView{
         this.txtCustomer.append(optionCustomer);
       })
      }
-     displayCars(cars){//cuando se elige en el option un car se coge el stringfy de
+     displayCars(cars){//cuando se elige en el option un car se coge el stringfy de car
         let optionCar;
         this.modalIdCar.innerHTML="";
          cars.forEach((car)=>{
@@ -96,17 +96,26 @@ class BookingView{
    
         this.add.addEventListener("click",event=>{
            event.preventDefault();  
-            const booking={
-                id:null,
-                customer : this.txtCustomer.value,
-                startDate : this.txtStartDate.value,
-                endDate : this.txtEndDate.value,
-                isDelivered: true,
-                details :this.listReservedCars
+           try{
+                const booking={
+                    id:null,
+                    customer : this.txtCustomer.value,
+                    startDate : this.txtStartDate.value,
+                    endDate : this.txtEndDate.value,
+                    isDelivered: true,
+                    details :this.listReservedCars
+                }
+                handler(booking);
+                this._resetInputs();
+                this.manageBookings.style.display = 'none';
+                
             }
-            handler(booking);
-            this._resetInputs();
-            this.manageBookings.style.display = 'none';
+            catch (error){
+                $('#modalMsg').empty();
+                $('#modalMsg').append(error);
+                $('#info').modal();
+          
+           } 
         })
     }
     bindResetForm(){
@@ -178,8 +187,8 @@ class BookingView{
  bindUpdateBooking(handler){
         this.update.addEventListener("click",event=>{
           event.preventDefault();  
-          console.log("La lista de coches alquilados"+JSON.stringify(this.listReservedCars));
-            let bookingUpdate={
+          try{
+             let bookingUpdate={
                  id: this.currentBooking,
                  customer : this.txtCustomer.value,
                  startDate: this.txtStartDate.value,
@@ -187,14 +196,19 @@ class BookingView{
                  isDelivered:this.chkDelivered.checked,
                  details : this.listReservedCars
              }
-             console.log("desde el update",bookingUpdate);
-           
              handler(bookingUpdate);
              this._resetInputs();
              this.manageBookings.style.display = 'none';
- 
-         })
-    } 
+             
+          }
+          catch (error){
+             $('#modalMsg').empty();
+             $('#modalMsg').append(error);
+             $('#info').modal();
+       
+         } 
+     })
+ }
     bindClickAddForm(){
         this.btnShowForm.addEventListener("click",event=>{
             event.preventDefault();  

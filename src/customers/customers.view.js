@@ -70,6 +70,7 @@ class CustomerView{
     bindAddCustomer(handler){
         this.add.addEventListener("click",event=>{
            event.preventDefault();  
+          try{
            const customer={
                      dni:this.txtDNI.value,
                      name:this.txtName.value,
@@ -77,8 +78,16 @@ class CustomerView{
                      phone:this.txtPhone.value,
                      endorse:this.txtEndorse.value
                 }
-                console.log("Loq voy a introducir",customer);
-            handler(customer);
+                handler(customer);
+                this._resetInputs();
+                this.manageCustomers.style.display = 'none';
+           }
+            catch (error){
+                $('#modalMsg').empty();
+                $('#modalMsg').append(error);
+                $('#info').modal();
+          
+           }       
            
         })
     }

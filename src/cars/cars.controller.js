@@ -23,8 +23,8 @@ class CarController {
         this.view.displayCars(cars);
     };
 
-    handleAddCar = ({id,brand,model,color,garaje,price,gasoline}) => {
-         this.service.addCar({id,brand,model,color,garaje,price,gasoline});
+    handleAddCar = (car) => {
+         this.service.addCar(car);
         
      };
     handlerDeleteCar = (idCar) => {
@@ -35,10 +35,8 @@ class CarController {
         let car = this.service.findCarById(idCar);
         this.view.completeForm(car);
     }
-    handlerUpdateCar = ({id,brand,model,color,garaje,price,gasoline}) => {
-        this.service.updateCar({id,brand,model,color,garaje,price,gasoline});
-       let valid=true;
-        this.view.showResponse(valid);
+    handlerUpdateCar = (car) => {
+        this.service.updateCar(car);
     }
 
 

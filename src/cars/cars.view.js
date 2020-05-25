@@ -87,7 +87,7 @@ class CarView{
                this.manageCars.style.display = 'none';
             }
             catch (error){
-                $('#modalMsg').append("");
+                $('#modalMsg').empty();
                 $('#modalMsg').append(error);
                 $('#info').modal();
            } 
@@ -148,7 +148,8 @@ class CarView{
     bindUpdateCar(handler){
         this.update.addEventListener("click",event=>{
           event.preventDefault();  
-            let carUpdate={
+           try{
+             let carUpdate={
                  id: this.currentCar,
                  brand:this.txtBrand.value,
                  model:this.txtModel.value,
@@ -158,7 +159,15 @@ class CarView{
                  garaje:this.txtGaraje.value
              }
              handler(carUpdate);
-         })
+             this._resetInputs();
+             this.manageCars.style.display = 'none';
+          }
+          catch (error){
+              $('#modalMsg').empty();
+              $('#modalMsg').append(error);
+              $('#info').modal();
+         } 
+      })
     } 
     showResponse(valid){
         let modal='show';

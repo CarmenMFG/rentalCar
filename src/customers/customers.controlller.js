@@ -19,12 +19,9 @@ class CustomerController {
         this.view.displayEndorses(customers);
     };
 
-    handleAddCustomer = ({name,address,phone,dni,endorse}) => {
-         this.service.addCustomer({name,address,phone,dni,endorse});
-         let valid=true;
-     
-        this.view.showResponse(valid);
-     };
+    handleAddCustomer = (customer) => {
+         this.service.addCustomer(customer);
+    };
     handlerDeleteCustomer = (idCustomer) => {
         let customer = this.service.findCustomerById(idCustomer);
         this.service.deleteCustomer(customer);
@@ -33,11 +30,8 @@ class CustomerController {
         let customer = this.service.findCustomerById(idCustomer);
         this.view.completeForm(customer);
     }
-    handlerUpdateCustomer = ({id,name,address,phone,dni,endorse}) => {
-         
-          this.service.updateCustomer({id,name,address,phone,dni,endorse});
-          let valid=true;
-          this.view.showResponse(valid);
+    handlerUpdateCustomer = (customer) => {
+        this.service.updateCustomer(customer);
     }
 
 

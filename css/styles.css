@@ -185,5 +185,12 @@ body {
   .noVisible{
     display:none;
   }
+  .visible{
+    display:inline-block !important;
+  }
+  h6{
+    text-decoration: underline;
+    color:#218838;
+  }
  
   

@@ -1,8 +1,9 @@
 class CustomerService {
     CONST_CUSTOMERS_TABLE='customers';
-    constructor(local,dixie) {
+    constructor(local,dixie,validation) {
         this.local=local;
         this.dixie=dixie;
+        this.validation=validation;
         this.customers=[];
              
     } 
@@ -12,6 +13,27 @@ class CustomerService {
        this.customers = (customers || []).map(customer => new Customer(customer));
        return this.customers;
     }
+    _validateData({name,address,phone,dni}){
+        const errors={};
+       if (!this.validation.validateFieldText(name)){
+           errors.ERROR_NAMEINVALID=true;
+       }
+       if (!this.validation.validateFieldText(address)){
+           errors.ERROR_ADDRESSINVALID=true;
+       }
+       if (!this.validation.validateDNI(dni)){
+          errors.ERROR_DNIINVALID=true;
+      }
+      if (!this.validation.validatePhone(phone)){
+          errors.ERROR_PHONEINVALID=true;
+      }
+       if (Object.keys(errors).length>0){
+           throw new CustomersException(errors);
+       } 
+      return true;
+    }
+
+
     bindCustomerListChanged(callback) {
         this.onCustomerListChanged = callback;
     }
@@ -21,6 +43,7 @@ class CustomerService {
     }
 
     addCustomer(customer) {
+        this._validateData(customer);
         let customerObj = new Customer(customer)
         this.customers = [...this.customers, customerObj];
         this.local.add(customerObj,this.CONST_CUSTOMERS_TABLE);

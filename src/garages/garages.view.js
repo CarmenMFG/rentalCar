@@ -60,7 +60,7 @@ class GarageView{
                
             }
             catch (error){
-                $('#modalMsg').append("");
+                $('#modalMsg').empty();
                 $('#modalMsg').append(error);
                 $('#info').modal();
           
@@ -117,23 +117,25 @@ class GarageView{
     bindUpdateGarage(handler){
         this.update.addEventListener("click",event=>{
           event.preventDefault();  
+          try{
+            
             let garageUpdate={
-                 id: this.currentGarage,
-                 address:this.txtAddress.value
-             }
-             handler(garageUpdate);
+                    id: this.currentGarage,
+                    address:this.txtAddress.value
+                }
+                handler(garageUpdate);
+                this._resetInputs();
+                this.manageGarages.style.display = 'none';
+            }
+            catch (error){
+                $('#modalMsg').empty();
+                $('#modalMsg').append(error);
+                $('#info').modal();
+          
+           }       
          })
     } 
-    showResponse(error){
-        let modal='show';
-        if (error=""){
-        
-        }
-        alert("Los errores son"+error);
-        // $('#info').modal(modal);	
-        
-    }
-
+  
   
 
 }        

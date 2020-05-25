@@ -1,3 +1,5 @@
+/*Esta versión crea BBDD y una tabla "general" en ella*/
+
 class StorageService {
     LOCAL='localStorage';
     DIXIE= 'dixie';

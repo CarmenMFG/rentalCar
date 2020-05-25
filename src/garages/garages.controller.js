@@ -29,13 +29,8 @@ class GarageController {
         let garage = this.service.findGarageById(idGarage);
         this.view.completeForm(garage);
     }
-    handlerUpdateGarage = ({id,address}) => {
-        let valid=false;
-      
-            this.service.updateGarage({id,address});
-            valid=true;
-       
-         this.view.showResponse(valid);
+    handlerUpdateGarage = (garage) => {
+       this.service.updateGarage(garage);
     }
 
 

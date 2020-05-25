@@ -46,28 +46,30 @@
                 <form>
                     <div class="formHeader">						
                       <h4 id="titleForm"></h4>
-                    </div>
-                  	 <div class="form-group">
-                       <label>Customer</label>
-                       <select class="form-control" id="txtCustomer"></select>
                      </div>
-                    
-                     <div class="form-group">
-                        <label>Start Date</label>
-                        <input type="date" id="txtStartDate"  class="form-control" name="txtStartDate">
-                     </div>
-                     <div class="form-group">
-                        <label>End Date</label>
-                        <input type="date" id="txtEndDate" class="form-control" name="txtEndDate">
+                    <div>					
+                      <div class="form-group">
+                        <label>Customer</label>
+                        <select class="form-control" id="txtCustomer">
                       </div>
                       <div class="form-group">
-                        <label class="form-check-label visible" id="lblDelivered" for="chkDelivered">Is Delivered</label>
-                        <input class="form-check-input ml-3 visible" type="checkbox" id="chkDelivered" value="isDelivered">
+                        <label>Start Date</label>
+                        <input type="date" id="txtStartDate" name="txtStartDate">
                       </div>
-                   
-                      <div class="mt-3">
+                      <div class="form-group">
+                        <label>End Date</label>
+                        <input type="date" id="txtEndDate" name="txtEndDate">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-check-label" id="lblDelivered" for="chkDelivered">Is Delivered</label>
+                        <input class="form-check-input ml-3" type="checkbox" id="chkDelivered" value="isDelivered">
+                      
+                      </div>
+      
+                      <div class="mt-2">
                         <label><h6>Reserved Cars</h6></label>
                         <table width="100%">
+                           <thead>
                             <thead><tr>
                                 <th>Registration</th>
                                 <th>Price</th>
@@ -80,7 +82,7 @@
                         <label><a href="#addCar" class="linkCar" data-toggle="modal">
                             + Add New Car</a></label>
                      </div>
-               
+                    </div>               
                     <div class="formFooter mt-5">
                       <input type="submit" class="btn btn-success " id="add" value="Add">
                       <input type="submit" class="btn btn-success" id="update" value="Update">

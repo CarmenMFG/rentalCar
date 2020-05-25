@@ -2,10 +2,10 @@ class BookingService {
     CONST_CUSTOMERS_TABLE='customers';
     CONST_CARS_TABLE='cars';
     CONST_BOOKINGS_TABLE='bookings';
-    constructor(local,dexie) {
+    constructor(local,dexie,validation) {
         this.local=local;
         this.dexie=dexie;
-        
+        this.validation=validation;
         this.bookings=[];
         this.customers =[];
         this.cars=[];
@@ -36,10 +36,28 @@ class BookingService {
     _commit(bookings) {
         this.onBookingListChanged(bookings);
     }
+    _validateData({customer,startDate,endDate,details}){
+        alert(customer);
+        const errors={};
+       if (!this.validation.validateFieldText(customer)){
+           errors.ERROR_CUSTOMERINVALID=true;
+       }
+      if (!this.validation.validateDate(startDate)){
+           errors.ERROR_STARTDATEINVALID=true;
+       }
+       if (!this.validation.validateDate(endDate)){
+        errors.ERROR_ENDDATEINVALID=true;
+       }
+         
+       if (Object.keys(errors).length>0){
+           throw new BookingsException(errors);
+       } 
+      return true;
+    }
 
     addBooking(booking) {
-         let bookingObj = new Booking(booking);
-        console.log("dentro del addBooking",bookingObj);
+        this._validateData(booking);
+        let bookingObj = new Booking(booking);
         this.bookings = [...this.bookings, bookingObj];
         this.local.add(bookingObj,this.CONST_BOOKINGS_TABLE);
         this.dexie.add(bookingObj,this.CONST_BOOKINGS_TABLE);
@@ -56,7 +74,7 @@ class BookingService {
         this._commit(this.bookings);
     }
     updateBooking(booking) {
-    
+        this._validateData(booking);
         this.bookings = this.bookings.map((_booking) =>
         _booking.id === booking.id ? new Booking(booking) : _booking);
         this.local.update(booking,this.CONST_BOOKINGS_TABLE);

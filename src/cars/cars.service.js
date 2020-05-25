@@ -43,7 +43,13 @@ class CarService {
        if (!this.validation.validateFieldText(garaje)){
         errors.ERROR_GARAGEINVALID=true;
        }
-
+       if (!this.validation.validateFieldNumber(price)){
+        errors.ERROR_PRICEINVALID=true;
+       }
+       if (!this.validation.validateFieldNumber(gasoline)){
+        errors.ERROR_GASOLINEINVALID=true;
+       }
+      
        if (Object.keys(errors).length>0){
            throw new CarsException(errors);
        } 
@@ -70,7 +76,7 @@ class CarService {
         this._commit(this.cars,this.CONST_CARS_TABLE);
     }
     updateCar(car) {
-        console.log(new Car(car) );
+        this._validateData(car);
         this.cars = this.cars.map((_car) =>
         _car.id === car.id ? new Car(car) : _car);
         this.local.update(car,this.CONST_CARS_TABLE);

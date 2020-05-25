@@ -55,7 +55,7 @@ class GarageService {
         this._commit(this.garages);
     }
     updateGarage(garage) {
-        console.log(new Garage(garage) );
+        this._validateData(garage);
         this.garages = this.garages.map((_garage) =>
         _garage.id === garage.id ? new Garage(garage) : _garage);
         this.local.update(garage,this.CONST_GARAGES_TABLE);
