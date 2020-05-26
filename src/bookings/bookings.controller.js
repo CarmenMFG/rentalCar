@@ -32,9 +32,7 @@ class BookingController {
 
     handleAddBooking = (booking) => {
            this.service.addBooking(booking);
-           let valid=true;
-           this.view.showResponse(valid);
-     };
+    };
     handlerDeleteBooking = (idBooking) => {
         let booking = this.service.findBookingById(idBooking);
         this.service.deleteBooking(booking);

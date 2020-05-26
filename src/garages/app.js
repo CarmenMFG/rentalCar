@@ -8,12 +8,13 @@ const storageServiceLocal = new StorageService({
     
   });
   const validation=new ValidationService();
+  const httpService= new HttpService();
 
  (async () => {
     try {
         await storageServiceLocal.initializeDB();
         await storageServiceDixie.initializeDB();
-        const garageService = new GarageService(storageServiceLocal,storageServiceDixie,validation);
+        const garageService = new GarageService(storageServiceLocal,storageServiceDixie,validation,httpService);
         const garages = await garageService.loadGaragesAwait();
         const garageView = new GarageView();
         new GarageController(garageService, garageView);

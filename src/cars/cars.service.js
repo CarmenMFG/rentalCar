@@ -1,12 +1,14 @@
 class CarService {
     CONST_CARS_TABLE='cars';
     CONST_GARAGES_TABLE='garages';
-    constructor(local,dixie,validation) {
+    constructor(local,dixie,validation,httpService) {
         this.local=local;
         this.dixie=dixie;
         this.validation=validation;
+        this.httpService=httpService;
         this.cars=[];
         this.garages=[];
+        this.URL= 'http://localhost:8001/cars';
         
     } 
     async loadCarsAwait() {
@@ -63,6 +65,7 @@ class CarService {
         this.cars = [...this.cars, carObj];
         this.local.add(carObj,this.CONST_CARS_TABLE);
         this.dixie.add(carObj,this.CONST_CARS_TABLE);
+        this.httpService.post(this.URL,JSON.stringify(carObj));
         this._commit(this.cars);
 
     }
@@ -73,7 +76,9 @@ class CarService {
         this.cars = this.cars.filter(({ id }) => id != car.id);
         this.local.remove(car,this.CONST_CARS_TABLE);
         this.dixie.remove(car,this.CONST_CARS_TABLE);
-        this._commit(this.cars,this.CONST_CARS_TABLE);
+        this.httpService.delete(this.URL,JSON.stringify(car));
+        this._commit(this.cars);
+   
     }
     updateCar(car) {
         this._validateData(car);
@@ -81,7 +86,8 @@ class CarService {
         _car.id === car.id ? new Car(car) : _car);
         this.local.update(car,this.CONST_CARS_TABLE);
         this.dixie.update(car,this.CONST_CARS_TABLE);
-        this._commit(this.cars,this.CONST_CARS_TABLE);
+        this.httpService.put(this.URL,JSON.stringify(car));
+        this._commit(this.cars);
     }
 
 

@@ -152,9 +152,8 @@ class BookingView{
      }
     completeForm({customer,startDate,endDate,details,isDelivered}){
         this.txtCustomer.value=customer;
-        this.txtStartDate.value=startDate;
-        this.txtEndDate.value=endDate;
-       //this.listReservedCars=foodPairing.map(({id,...rest}) => ({...rest}));
+        this.txtStartDate.value=moment(startDate).format('YYYY-MM-DD');
+        this.txtEndDate.value=moment(endDate).format('YYYY-MM-DD');
         this.listReservedCars=details;
         this.chkDelivered.checked=isDelivered;
         this.completeTableCars();
@@ -236,18 +235,7 @@ class BookingView{
     _deleteFieldsAddCarModal(){
 		this.modalIdCar.value = ""; 
      }
-     showResponse(valid){
-        let modal='show';
-        if (valid){
-            this._resetInputs();
-            this.manageBookings.style.display = 'none';
-            modal='hide';
-        }
-         $('#info').modal(modal);	
-        
-    }
-
-  
+    
 }
     
  

@@ -8,11 +8,12 @@ const storageServiceLocal = new StorageService({
     
   });
   const validation=new ValidationService();
+  const httpService= new HttpService();
  (async () => {
     try {
         await storageServiceLocal.initializeDB();
         await storageServiceDixie.initializeDB();
-        const customerService = new CustomerService(storageServiceLocal,storageServiceDixie,validation);
+        const customerService = new CustomerService(storageServiceLocal,storageServiceDixie,validation,httpService);
         const customers = await customerService.loadCustomersAwait();
         const customerView = new CustomerView();
         new CustomerController(customerService,customerView);

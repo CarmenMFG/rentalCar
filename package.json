@@ -1,0 +1,25 @@
+{
+  "name": "rentalcar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others \"node shared/services/httpServer.js\" \"npx serve\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarmenMFG/rentalCar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarmenMFG/rentalCar/issues"
+  },
+  "homepage": "https://github.com/CarmenMFG/rentalCar#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
+}

@@ -2,7 +2,8 @@ class BookingsException extends Error{
     msgError={  ERROR_CUSTOMERINVALID:" Customer no valid ",
                 ERROR_STARTDATEINVALID:" Start date no valid ",
                 ERROR_ENDDATEINVALID:" End date no valid ",
-                ERROR_DETAILS:" Reserve a car "}; 
+                ERROR_DETAILS:" Reserve a car ",
+                ERROR_INTERVALDATESINVALID:"Invalid date range "}; 
     constructor(value,msg="bookingsExceptions:Error not found"){
        super();
        this.message=this.handlerError(value,msg);

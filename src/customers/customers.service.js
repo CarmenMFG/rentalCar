@@ -1,10 +1,12 @@
 class CustomerService {
     CONST_CUSTOMERS_TABLE='customers';
-    constructor(local,dixie,validation) {
+    constructor(local,dixie,validation,httpService) {
         this.local=local;
         this.dixie=dixie;
         this.validation=validation;
+        this.httpService=httpService;
         this.customers=[];
+        this.URL= 'http://localhost:8001/customers';
              
     } 
     async loadCustomersAwait() {
@@ -48,6 +50,7 @@ class CustomerService {
         this.customers = [...this.customers, customerObj];
         this.local.add(customerObj,this.CONST_CUSTOMERS_TABLE);
         this.dixie.add(customerObj,this.CONST_CUSTOMERS_TABLE);
+        this.httpService.post(this.URL,JSON.stringify(customerObj));
         this._commit(this.customers);
 
     }
@@ -58,6 +61,7 @@ class CustomerService {
         this.customers = this.customers.filter(({ id }) => id != customer.id);
         this.local.remove(customer,this.CONST_CUSTOMERS_TABLE);
         this.dixie.remove(customer,this.CONST_CUSTOMERS_TABLE);
+        this.httpService.delete(this.URL,JSON.stringify(customer));
         this._commit(this.customers);
     }
     updateCustomer(customer) {
@@ -65,6 +69,7 @@ class CustomerService {
         _customer.id === customer.id ? new Customer(customer) : _customer);
         this.local.update(customer,this.CONST_CUSTOMERS_TABLE);
         this.dixie.update(customer,this.CONST_CUSTOMERS_TABLE);
+        this.httpService.put(this.URL,JSON.stringify(customer));
         this._commit(this.customers);
     }
 

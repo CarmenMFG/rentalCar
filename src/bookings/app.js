@@ -7,11 +7,12 @@ const storageServiceLocal = new StorageService({
     configuration: { key: 'id'},
   });
   const validation=new ValidationService();
+  const httpService= new HttpService();
  (async () => {
     try {
         await storageServiceLocal.initializeDB();
         await storageServiceDixie.initializeDB();
-        const bookingService = new BookingService(storageServiceLocal,storageServiceDixie,validation);
+        const bookingService = new BookingService(storageServiceLocal,storageServiceDixie,validation,httpService);
         const booking= await bookingService.loadBookingsAwait();
         const customer = await bookingService.loadCustomersAwait() 
         const cars=await bookingService.loadCarsAwait();

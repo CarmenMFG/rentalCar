@@ -2,13 +2,15 @@ class BookingService {
     CONST_CUSTOMERS_TABLE='customers';
     CONST_CARS_TABLE='cars';
     CONST_BOOKINGS_TABLE='bookings';
-    constructor(local,dexie,validation) {
+    constructor(local,dexie,validation,httpService) {
         this.local=local;
         this.dexie=dexie;
         this.validation=validation;
+        this.httpService=httpService;
         this.bookings=[];
         this.customers =[];
         this.cars=[];
+        this.URL= 'http://localhost:8001/bookings';
            
     } 
 
@@ -48,6 +50,9 @@ class BookingService {
        if (!this.validation.validateDate(endDate)){
         errors.ERROR_ENDDATEINVALID=true;
        }
+       if (!this.validation.validateValidDates(startDate,endDate)){
+           errors.ERROR_INTERVALDATESINVALID=true;
+       }
          
        if (Object.keys(errors).length>0){
            throw new BookingsException(errors);
@@ -62,7 +67,9 @@ class BookingService {
         this.local.add(bookingObj,this.CONST_BOOKINGS_TABLE);
         this.dexie.add(bookingObj,this.CONST_BOOKINGS_TABLE);
         this._commit(this.bookings);
-
+        bookingObj.startDate=moment(bookingObj.startDate).unix();
+        bookingObj.endDate=moment(bookingObj.endDate).unix();
+        this.httpService.post(this.URL,JSON.stringify(bookingObj));
     }
     findBookingById(idBooking) {
         return this.bookings.find(({ id }) => id == idBooking);
@@ -71,6 +78,7 @@ class BookingService {
         this.bookings = this.bookings.filter(({ id }) => id != booking.id);
         this.local.remove(booking,this.CONST_BOOKINGS_TABLE);
         this.dexie.remove(booking,this.CONST_BOOKINGS_TABLE);
+        this.httpService.delete(this.URL,JSON.stringify(booking));
         this._commit(this.bookings);
     }
     updateBooking(booking) {
@@ -80,6 +88,10 @@ class BookingService {
         this.local.update(booking,this.CONST_BOOKINGS_TABLE);
         this.dexie.update(booking,this.CONST_BOOKINGS_TABLE);
         this._commit(this.bookings);
+        booking.startDate=moment(booking.startDate).unix();
+        booking.endDate=moment(booking.endDate).unix();
+        this.httpService.put(this.URL,JSON.stringify(booking));
+      
     }
 
 

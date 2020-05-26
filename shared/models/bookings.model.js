@@ -7,7 +7,7 @@ class Booking {
     this.details=details.map(detail=> new BookingsDetails(detail));
    // this.details=details;
     this.isDelivered=isDelivered;
-    this.totalPrice=this.details.reduce((result,{price})=>result+parseInt(price),0);
+    this.totalPrice=this.details.reduce((result,{price})=>result+parseInt(price)*moment(endDate).diff(moment(startDate),'days'),0);
    
 
 }
