@@ -18,7 +18,5 @@ class ValidationService{
         let now = moment();
         return (moment(dateStart).isBefore(dateEnd) && now.isSameOrBefore(dateStart));
       }
-     
-    
-    
+   
 }
