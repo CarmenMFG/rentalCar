@@ -44,14 +44,15 @@ class CustomerView{
      }
      
      displayEndorses(endorses){//cuando se elige en el option un endorse se coge el DNI
-            let optionEndorse;
+         console.log("Estoy en display",endorses);  
+         let optionEndorse;
            //Hay q borrar todos los options..Acordarse
            this.txtEndorse.innerHTML="";
              endorses.forEach((endorse)=>{
                 optionEndorse =document.createElement("option");
                 optionEndorse.setAttribute("value",endorse.dni);
-                optionEndorse.setAttribute("label",endorse.name + " - "+ endorse.dni);
-            this.txtEndorse.append(optionEndorse);
+                optionEndorse.innerText=endorse.name + " - "+ endorse.dni;
+                this.txtEndorse.append(optionEndorse);
           })
          }
      _resetInputs(){

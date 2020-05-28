@@ -19,7 +19,8 @@ class CarService {
     }
     async loadGaragesAwait(){
         const garages= await this.local.find(this.CONST_GARAGES_TABLE);
-        this.garages = (garages||[]).map(garage => new Garage(garage));
+        this.garages=(garages||[]);
+       // this.garages = (garages||[]).map(garage => new Garage(garage));
         return this.garages;
     }
      bindCarListChanged(callback) {

@@ -57,23 +57,23 @@ class BookingView{
                
     }
   displayCustomers(customers){//cuando se elige en el option un customer se coge el DNI
-        console.log(this.btnAddCar);
         let optionCustomer;
         this.txtCustomer.innerHTML="";
         customers.forEach((customer)=>{
             optionCustomer =document.createElement("option");
             optionCustomer.setAttribute("value",customer.dni);
-            optionCustomer.setAttribute("label",customer.name + " - "+ customer.dni);
+            optionCustomer.innerText=customer.name + " - "+ customer.dni;
         this.txtCustomer.append(optionCustomer);
+        console.log(this.txtCustomer);
       })
      }
      displayCars(cars){//cuando se elige en el option un car se coge el stringfy de car
-        let optionCar;
-        this.modalIdCar.innerHTML="";
-         cars.forEach((car)=>{
+       let optionCar;
+       this.modalIdCar.innerHTML="";
+        cars.forEach((car)=>{
             optionCar =document.createElement("option");
             optionCar.setAttribute("value",JSON.stringify(car));
-            optionCar.setAttribute("label",car.id+ " - "+ car.brand + car.model);
+            optionCar.innerText=car.id+ " - "+ car.brand + car.model;
         this.modalIdCar.append(optionCar);
       })
      }

@@ -21,14 +21,17 @@ class BookingService {
        return this.bookings;
     }
     async loadCustomersAwait() {
-        const customers = await this.local.find(this.CONST_CUSTOMERS_TABLE);
-        this.customers = (customers || []).map(customer => new Customer(customer));
-        return this.customers;
+       const customers = await this.local.find(this.CONST_CUSTOMERS_TABLE);
+       this.customers =customers;
+       console.log(customers);
+      // this.customers = (customers || []).map(customer => new Customer(customer));
+       return this.customers;
      }
     async loadCarsAwait() {
-        const cars = await this.local.find(this.CONST_CARS_TABLE);
-        this.cars = (cars || []).map(car => new Car(car));
-        return this.cars;
+       const cars = await this.local.find(this.CONST_CARS_TABLE);
+       this.cars = cars;
+       //  this.cars = (cars || []).map(car => new Car(car));
+       return this.cars;
      }
 
     bindBookingListChanged(callback) {

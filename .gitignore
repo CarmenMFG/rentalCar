@@ -1,1 +1,48 @@
 **/node_modules
+
+
+
+<!--<script src="../shared/models/garage.model.js"></script>
+    <script src="../shared/models/cars.model.js"></script>
+      <script src="../shared/models/customer.model.js"></script>
+      <script src="../shared/models/bookingsDetails.model.js"></script>
+      <script src="../shared/models/bookings.model.js"></script>
+     <script src="garages/garages.service.js"></script>
+      <script src="garages/garages.view.js"></script>
+      <script src="garages/garages.exceptions.js"></script>
+      <script src="garages/garages.controller.js"></script>
+      <script src="cars/cars.service.js"></script>
+      <script src="cars/cars.exceptions.js"></script>
+      <script src="cars/cars.view.js"></script>
+      <script src="cars/cars.controller.js"></script>
+      <script src="customers/customers.exceptions.js"></script>
+      <script src="customers/customers.service.js"></script>
+      <script src="customers/customers.view.js"></script>
+      <script src="customers/customers.controlller.js"></script>-->
+
+        /*  $("#scriptsClass").remove();
+           console.log(scripts);*/
+           /* let allScripts = scripts.childNodes;
+            console.log("allScriptGArage",allScripts);
+          
+           let i = allScripts.length-1;
+             while (i>=0) {
+              scripts.removeChild(allScripts[i]); 
+              //allScripts[i].parentNode.removeChild(allScripts[i]);
+               console.log("garages"+i+ allScripts);
+               i--;
+             }*/
+                
+       /* document.getElementById("root").innerHTML=html;
+        $("#scriptsClass").remove();
+        console.log(scripts);
+       let allScripts = scripts.childNodes;
+        console.log("allScriptGArage",allScripts[0]);
+        let i = allScripts.length-1;
+              while (i>=0) {
+                scripts.removeChild(allScripts[i]); 
+                //allScripts[i].parentNode.removeChild(allScripts[i]);
+                console.log("garages"+i+ allScripts);
+                i--;
+              }
+          console.log("cars",allScripts);   */ 
