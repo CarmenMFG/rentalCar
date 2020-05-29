@@ -88,12 +88,20 @@ app.put('/customers', (req, res) => {
 let BOOKINGS = [];
 
 app.get('/bookings', (req, res) => {
-  res.send(BOOKINGS);
-});
+  const bookings = BOOKINGS.map((booking) => {
+    booking.startDate = moment(booking.startDate).format('YYYY-MM-DD');
+    booking.endDate = moment(booking.endDate).format('YYYY-MM-DD');
+    return booking;
+  });
+  res.send(bookings);
+});  
 
 app.post('/bookings', (req, res) => {
-  BOOKINGS.push(req.body);
-  res.send('Bookings has been added successfully');
+  const booking = req.body;
+  booking.startDate = moment(booking.startDate).valueOf();
+  booking.endDate = moment(booking.endDate).valueOf();
+  BOOKINGS.push(booking);
+  res.send('Booking has been added successfully');
 });
 app.delete('/bookings', (req, res) => {
   BOOKINGS = BOOKINGS.filter(({ id }) => id !== req.body.id);
@@ -101,8 +109,11 @@ app.delete('/bookings', (req, res) => {
 });
 
 app.put('/bookings', (req, res) => {
+  const bookingUpdate = req.body;
+  bookingUpdate.startDate = moment(bookingUpdate.startDate).valueOf();
+  bookingUpdate.endDate = moment(bookingUpdate.endDate).valueOf();
   BOOKINGS = BOOKINGS.map((booking) =>
-  booking.id === req.body.id ? req.body : booking);
+  booking.id === bookingUpdate.id ? bookingUpdate : booking);
   res.send('Bookings updated successfully'+req);
 });
 

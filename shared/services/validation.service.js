@@ -15,8 +15,7 @@ class ValidationService{
         return REGEXP.DNI.test(dni);
       }
       validateValidDates(dateStart,dateEnd){
-        let now = moment();
-        return (moment(dateStart).isBefore(dateEnd) && now.diff(moment(dateStart),'days')>=0);
+        return (moment(dateStart).isBefore(moment(dateEnd)));
       }
    
 }

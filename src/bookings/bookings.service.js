@@ -70,8 +70,8 @@ class BookingService {
         this.local.add(bookingObj,this.CONST_BOOKINGS_TABLE);
         this.dexie.add(bookingObj,this.CONST_BOOKINGS_TABLE);
         this._commit(this.bookings);
-        bookingObj.startDate=moment(bookingObj.startDate).unix();
-        bookingObj.endDate=moment(bookingObj.endDate).unix();
+        /*bookingObj.startDate=moment(bookingObj.startDate).unix();
+        bookingObj.endDate=moment(bookingObj.endDate).unix();*/
         this.httpService.post(this.URL,JSON.stringify(bookingObj));
     }
     findBookingById(idBooking) {
