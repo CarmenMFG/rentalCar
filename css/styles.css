@@ -192,5 +192,10 @@ body {
     text-decoration: underline;
     color:#218838;
   }
- 
+  ul {
+    font-size:1.7em !important;
+  }
+ h1{
+   text-align:center;
+ }
   

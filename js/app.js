@@ -1,7 +1,7 @@
 /*let storageServiceLocal;
 let storageServiceDixie;*/
 const scripts =document.getElementById('scriptsClass');
-let pageVisited={garages:false,cars:false,customers:false};
+let pageVisited={garages:false,cars:false,customers:false,bookings:false};
 
   const validation=new ValidationService();
   const httpService= new HttpService();
@@ -24,7 +24,7 @@ let pageVisited={garages:false,cars:false,customers:false};
  
     showComponent: () => {
      
-        fetch('http://localhost:5000/src/garages/garageHTML.html').then(function(response) {
+        fetch('http://localhost:5000/src/garages/garages.html').then(function(response) {
             return response.text()
          })
           .then(function(html) {
@@ -45,7 +45,7 @@ const CarsComponent ={
 
       showComponent: () => {
         
-          fetch('http://localhost:5000/src/cars/carHTML.html').then(function(response) {
+          fetch('http://localhost:5000/src/cars/cars.html').then(function(response) {
               return response.text()
           })
             .then(function(html) {
@@ -54,8 +54,7 @@ const CarsComponent ={
                 pageVisited.cars=true;  
                 insertScripts("cars");
               }  
-            
-               insertModuleScript("cars");
+                insertModuleScript("cars");
              })
              .catch(function(err) {
                console.log('Failed to fetch page: ', err);
@@ -64,7 +63,7 @@ const CarsComponent ={
  }
  const CustomersComponent ={
   showComponent: () => {
-    fetch('http://localhost:5000/src/customers/customerHTML.html').then(function(response) {
+    fetch('http://localhost:5000/src/customers/customers.html').then(function(response) {
         return response.text()
      })
       .then(function(html) {
@@ -84,13 +83,13 @@ const BookingsComponent ={
 
   showComponent: () => {
     
-      fetch('http://localhost:5000/src/bookings/bookingHTML.html').then(function(response) {
+      fetch('http://localhost:5000/src/bookings/bookings.html').then(function(response) {
           return response.text()
       })
         .then(function(html) {
           document.getElementById("root").innerHTML=html;
           if (!pageVisited.bookings){
-            pageVisited.cars=true;  
+            pageVisited.bookings=true;  
             insertScripts("bookings");
           }  
             insertModuleScript("bookings");
@@ -102,118 +101,9 @@ const BookingsComponent ={
 }
 
 
-
-
-
- /* const GaragesComponent = {
- 
-    showComponent: () => {
-     
-        fetch('http://localhost:5000/src/garages/garageHTML.html').then(function(response) {
-            return response.text()
-         })
-          .then(function(html) {
-           document.getElementById("root").innerHTML=html;
-           if (!pageVisited.garages){
-             pageVisited.garages=true;
-              let model = document.createElement('script');
-              model.setAttribute("type","text/javascript")
-              model.setAttribute("src",  `../shared/models/garage.model.js`);
-              scripts.append(model);
-            
-              let view = document.createElement('script');
-              view.setAttribute("type","text/javascript");
-              view.setAttribute("src", `garages/garages.view.js`);
-              scripts.append(view);
-
-              let exception=document.createElement('script');
-              exception.setAttribute("type","text/javascript")
-              exception.setAttribute("src",`garages/garages.exceptions.js`);
-              scripts.append(exception);
-
-              let service= document.createElement('script');
-              service.setAttribute("type","text/javascript");
-              service.setAttribute("src",`garages/garages.service.js`);
-              scripts.append(service);
-
-              let controller=document.createElement('script');
-              controller.setAttribute("type","text/javascript");
-              controller.setAttribute("src",'garages/garages.controller.js');
-              scripts.append(controller);
-            } 
-              let module=document.createElement('script');
-              module.setAttribute("type","text/javascript");
-              module.setAttribute("src",'garages/garages.module.js');
-              scripts.append(module);
-          
-   
-    });
-  } 
-
-}
-const CarsComponent ={
-  showComponent: () => {
-    
-      fetch('http://localhost:5000/src/cars/carHTML.html').then(function(response) {
-          return response.text()
-      })
-        .then(function(html) {
-          document.getElementById("root").innerHTML=html;
-          if (!pageVisited.cars){
-            pageVisited.cars=true;
-            let model = document.createElement('script');
-            model.setAttribute("type","text/javascript");
-            model.setAttribute("src", `../shared/models/cars.model.js`);
-            scripts.append(model);
-          
-            let view = document.createElement('script');
-            view.setAttribute("type","text/javascript");
-            view.setAttribute("src", `cars/cars.view.js`);
-            scripts.append(view);
-
-            let exception=document.createElement('script');
-            exception.setAttribute("type","text/javascript");
-            exception.setAttribute("src", `cars/cars.exceptions.js`);
-            scripts.append(exception);
-
-            let service= document.createElement('script');
-            service.setAttribute("type","text/javascript");
-            service.setAttribute("src",`cars/cars.service.js`);
-            scripts.append(service);
-
-            let controller=document.createElement('script');
-            controller.setAttribute("type","text/javascript");
-            controller.setAttribute("src",'cars/cars.controller.js');
-            scripts.append(controller);
-          }
-            let module=document.createElement('script');
-            module.setAttribute("type","text/javascript");
-            module.setAttribute("src",'cars/cars.module.js');
-            scripts.append(module);
-          
-      })
-      .catch(function(err) {
-        console.log('Failed to fetch page: ', err);
-      });
-  }
-
-}*/
-
-
-/*const CustomersComponent ={
-  showComponent: () => {
-    fetch('http://localhost:5000/src/customers/customerHTML.html').then(function(response) {
-        return response.text()
-     })
-      .then(function(html) {
-        document.getElementById("root").innerHTML=html;
-   
-  })
-}
-}*/
   const HomeComponent = {
     showComponent: () => {
-      document.getElementById("root").innerHTML='<div><h1>RENTAL A CAR</h1></div>';
+      document.getElementById("root").innerHTML='<div class="mt-5"><h1>WELCOME</h1></div>';
     }
   } 
   const ErrorComponent = {
@@ -236,14 +126,13 @@ const routes = [
  const router = () => {
     // Find the component based on the current path
     const path = parseLocation();
-    console.log("path",path);
-    // If there's no matching route, get the "Error" component
+     // If there's no matching route, get the "Error" component
     const { component = ErrorComponent } = findComponentByPath(path, routes) || {};
     // TODO: Render the component in the "app" placeholder
     component.showComponent();
   };
 
-   const  insertScripts=(name)=>{
+ const  insertScripts=(name)=>{
     let model = document.createElement('script');
     model.setAttribute("type","text/javascript")
     model.setAttribute("src",  `../shared/models/${name}.model.js`);

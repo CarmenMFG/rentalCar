@@ -16,7 +16,7 @@ class ValidationService{
       }
       validateValidDates(dateStart,dateEnd){
         let now = moment();
-        return (moment(dateStart).isBefore(dateEnd) && now.isSameOrBefore(dateStart));
+        return (moment(dateStart).isBefore(dateEnd) && now.diff(moment(dateStart),'days')>=0);
       }
    
 }

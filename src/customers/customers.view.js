@@ -24,6 +24,7 @@ class CustomerView{
 
     }
     displayCustomers(customers){
+        console.log(customers);
         this.customersCards.innerHTML="";
         let html;
         customers.forEach((customer) => {
@@ -153,6 +154,8 @@ class CustomerView{
                  endorse:this.txtEndorse.value
              }
              handler(customerUpdate);
+             this._resetInputs();
+             this.manageCustomers.style.display = 'none';
          })
     } 
     showResponse(valid){

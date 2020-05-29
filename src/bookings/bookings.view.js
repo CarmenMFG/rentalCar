@@ -132,13 +132,13 @@ class BookingView{
              handler(this.currentBooking);
              this.titleForm.innerHTML="Update <b>Booking</b>";
              this.manageBookings.style.display = 'block';
-             this.chkDelivered.style.display='block';
-             this.lblDelivered.style.display='block';
+             this.chkDelivered.disabled=false;
+           
              this.add.disabled=true;
              this.update.disabled=false;
             
          }
-        })  
+        }) 
      }
      bindDeleteBooking(handler){
         this.bookingsCards.addEventListener("click",event=>{
@@ -213,8 +213,7 @@ class BookingView{
             event.preventDefault();  
             this._resetInputs();  
             this.titleForm.innerHTML="Add <b>Booking</b>";
-            this.chkDelivered.style.display='none';
-            this.lblDelivered.style.display='none';
+            this.chkDelivered.disabled=true;
             this.manageBookings.style.display = 'block';
             this.update.disabled=true;
             this.add.disabled=false;

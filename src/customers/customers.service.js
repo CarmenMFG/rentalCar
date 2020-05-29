@@ -10,8 +10,9 @@ class CustomerService {
              
     } 
     async loadCustomersAwait() {
-       const customers = await this.dixie.find(this.CONST_CUSTOMERS_TABLE);
-      // this.customers=customers;
+       const customers = await this.local.find(this.CONST_CUSTOMERS_TABLE);
+     
+       // this.customers=customers;
        this.customers = (customers || []).map(customer => new Customer(customer));
        return this.customers;
     }
