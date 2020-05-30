@@ -23,7 +23,6 @@ class BookingService {
     async loadCustomersAwait() {
        const customers = await this.local.find(this.CONST_CUSTOMERS_TABLE);
        this.customers =customers;
-       console.log(customers);
       // this.customers = (customers || []).map(customer => new Customer(customer));
        return this.customers;
      }
@@ -42,7 +41,6 @@ class BookingService {
         this.onBookingListChanged(bookings);
     }
     _validateData({customer,startDate,endDate,details}){
-        alert(customer);
         const errors={};
        if (!this.validation.validateFieldText(customer)){
            errors.ERROR_CUSTOMERINVALID=true;

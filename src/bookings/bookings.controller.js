@@ -23,8 +23,7 @@ class BookingController {
         this.view.displayBookings(bookings);
     };
      onCustomerListChanged = (customers) => {
-         console.log("desde el controlador",this.service.customers);
-        this.view.displayCustomers(customers);
+         this.view.displayCustomers(customers);
     };
     onCarListChanged = (cars) => {
         this.view.displayCars(cars);

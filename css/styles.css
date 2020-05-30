@@ -146,7 +146,7 @@ body {
     border-radius: 0 0 3px 3px;
   }
   .modal .modal-header{
-    background: #435d7d;
+    background: #526985;
     color: #fff;
   }
   .modal .modal-title {
@@ -178,9 +178,10 @@ body {
   .show{
     display:inline;
   }
-  a.linkFood{
-   color:#435d7d;
+  a.linkCar{
+   color:#218838;
    font-weight: bold;
+   font-size: 1.2em;
   }
   .noVisible{
     display:none;
@@ -189,8 +190,12 @@ body {
     display:inline-block !important;
   }
   h6{
-    text-decoration: underline;
-    color:#218838;
+    width:100%;
+    text-align:center;
+    color:white;
+    background-color:#526985;
+    padding:3px;
+    letter-spacing: 2px;
   }
   ul {
     font-size:1.7em !important;

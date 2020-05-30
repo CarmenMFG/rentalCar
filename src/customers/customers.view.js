@@ -24,8 +24,7 @@ class CustomerView{
 
     }
     displayCustomers(customers){
-        console.log(customers);
-        this.customersCards.innerHTML="";
+         this.customersCards.innerHTML="";
         let html;
         customers.forEach((customer) => {
          html=document.createElement("tr");
@@ -45,9 +44,7 @@ class CustomerView{
      }
      
      displayEndorses(endorses){//cuando se elige en el option un endorse se coge el DNI
-         console.log("Estoy en display",endorses);  
-         let optionEndorse;
-           //Hay q borrar todos los options..Acordarse
+          let optionEndorse;
            this.txtEndorse.innerHTML="";
              endorses.forEach((endorse)=>{
                 optionEndorse =document.createElement("option");

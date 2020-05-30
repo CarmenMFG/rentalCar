@@ -64,7 +64,7 @@ class BookingView{
             optionCustomer.setAttribute("value",customer.dni);
             optionCustomer.innerText=customer.name + " - "+ customer.dni;
         this.txtCustomer.append(optionCustomer);
-        console.log(this.txtCustomer);
+       
       })
      }
      displayCars(cars){//cuando se elige en el option un car se coge el stringfy de car
@@ -164,7 +164,7 @@ class BookingView{
         let htmlCar;
         this.listReservedCars.forEach((car) => {
         htmlCar=document.createElement("tr");
-        htmlCar.innerHTML=`<td><b>${car.id}</b></td>
+        htmlCar.innerHTML=`<td>${car.id}</td>
                              <td>${car.price}</td>
                              <td>${car.gasoline}</td>
                              <td>
@@ -223,13 +223,14 @@ class BookingView{
     bindAddCar(){
         this.btnAddCar.addEventListener("click",event=>{
              event.preventDefault();  
-            let car=JSON.parse(this.modalIdCar.value);
-            this._deleteFieldsAddCarModal();
-            $('#addCar').modal('hide');
-            this.listReservedCars=[...this.listReservedCars,car]; 
-            this.completeTableCars();
-        }
-        )
+           if (this.modalIdCar.value!==""){
+                let car=JSON.parse(this.modalIdCar.value);
+                this.listReservedCars=[...this.listReservedCars,car]; 
+                this.completeTableCars();
+           }   
+           this._deleteFieldsAddCarModal();
+           $('#addCar').modal('hide'); 
+        });
     }
     _deleteFieldsAddCarModal(){
 		this.modalIdCar.value = ""; 

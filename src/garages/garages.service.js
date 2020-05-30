@@ -11,8 +11,7 @@ class GarageService {
     } 
     async loadGaragesAwait() {
        const garages = await this.local.find(this.CONST_GARAGES_TABLE);
-       console.log("garages",garages);
-      // this.garages=garages;
+       // this.garages=garages;
        this.garages = (garages || []).map(garage => new Garage(garage));
        return this.garages;
     }
