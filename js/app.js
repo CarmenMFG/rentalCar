@@ -140,21 +140,25 @@ const routes = [
     let view = document.createElement('script');
     view.setAttribute("type","text/javascript");
     view.setAttribute("src", `${name}/${name}.view.js`);
+    view.async = false;
     scripts.append(view);
 
     let exception=document.createElement('script');
     exception.setAttribute("type","text/javascript")
     exception.setAttribute("src",`${name}/${name}.exceptions.js`);
+    exception.async = false;
     scripts.append(exception);
 
     let service= document.createElement('script');
     service.setAttribute("type","text/javascript");
     service.setAttribute("src",`${name}/${name}.service.js`);
+    service.async = false;
     scripts.append(service);
 
     let controller=document.createElement('script');
     controller.setAttribute("type","text/javascript");
     controller.setAttribute("src",`${name}/${name}.controller.js`);
+    controller.async = false;
     scripts.append(controller);
  
   }
@@ -162,6 +166,7 @@ const routes = [
     let module=document.createElement('script');
     module.setAttribute("type","text/javascript");
     module.setAttribute("src",`${name}/${name}.module.js`);
+    module.async = false;
     scripts.append(module);
   }
 
