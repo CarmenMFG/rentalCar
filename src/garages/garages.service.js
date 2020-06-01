@@ -6,7 +6,7 @@ class GarageService {
         this.validation=validation;
         this.httpService=httpService;
         this.garages=[];
-        this.URL= 'http://localhost:8001/garages';
+        this.URL='http://localhost:8001/garages';
         
     } 
     async loadGaragesAwait() {

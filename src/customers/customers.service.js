@@ -46,6 +46,7 @@ class CustomerService {
     }
 
     addCustomer(customer) {
+        console.log("sevice",customer);
         this._validateData(customer);
         let customerObj = new Customer(customer)
         this.customers = [...this.customers, customerObj];

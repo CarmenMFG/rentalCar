@@ -20,6 +20,7 @@ class CustomerController {
     };
 
     handleAddCustomer = (customer) => {
+        console.log("controller",customer);
          this.service.addCustomer(customer);
     };
     handlerDeleteCustomer = (idCustomer) => {

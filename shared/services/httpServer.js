@@ -117,12 +117,6 @@ app.put('/bookings', (req, res) => {
   res.send('Bookings updated successfully'+req);
 });
 
-
-
-
-
-
-
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to API Rest');
 });

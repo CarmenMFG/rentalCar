@@ -7,7 +7,7 @@ let pageVisited={garages:false,cars:false,customers:false,bookings:false};
   const httpService= new HttpService();
  
   let storageServiceLocal = new StorageService({
-    type: 'localStorage', //localstorage o indexedDB o dixie
+    type: 'localStorage', //localstorage o indexedDB o dexie
     configuration: { key: 'id' }
   });
   let storageServiceDixie= new StorageService({

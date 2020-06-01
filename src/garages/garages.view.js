@@ -30,7 +30,7 @@ class GarageView{
                              <td>${garage.address}</td>
                              <td>
                              <a class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                             <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                              </td>`;
          this.garagesCards.append(html);   
         });                    
@@ -40,7 +40,6 @@ class GarageView{
         this.txtAddress.value="";
         this.titleForm.innerHTML="Garages Form";
         this.currentGarage="";
-        this.update.disabled=false;
         this.add.disabled=false;
         this.txtName.disabled =false;
         this.update.disabled=true;

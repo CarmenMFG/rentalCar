@@ -120,16 +120,16 @@ body {
    
   }
  /**Formularios**/ 
-  #manageCars{
+  .manageCars{
     display:none;
   }
-  #manageGarage{
+  .manageGarage{
     display:none;
   }
-  #manageCustomers{
+  .manageCustomers{
     display:none;
   }
-  #manageBooking{
+  .manageBooking{
     display:none;
   }
   /** Modal**/
